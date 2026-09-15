@@ -46,7 +46,8 @@ tableOfContents: false
 
 ### 📌 As 4 Raias de Decisão
 
-1. **Borda (Câmera IP / Catraca):** Captura ótica, detecção biométrica, 1:N match local.
+1. **Borda (Câmeras IP Entrada/Saída/Refeitório):** Captura ótica, detecção biométrica, 1:N match local no hardware.
 2. **Gateway (Netty TCP :50000):** Validação de assinatura de pacote, CPU throttling, publicação no broker.
 3. **Estado (Redis Cache):** Avaliação de chave de duplicata (300s) e categorização `IN`, `OUT` ou `REF`.
 4. **Domínio Escolar (PostgreSQL & Grade):** Reconciliação com grade curricular e geração de alertas de Busca Ativa.
+

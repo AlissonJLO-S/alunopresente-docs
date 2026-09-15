@@ -47,5 +47,6 @@ tableOfContents: false
 ### 📌 Destaques Arquiteturais deste Diagrama
 
 - **Executáveis vs Bibliotecas JAR:** As 4 APIs (`base-api`, `educacao-api`, `cadastro-face-api`, `saude-api`) são as únicas com método `main`. As 8 bibliotecas (`commons-lib`, `base-service`, `alunopresente-service`, etc.) são acopladas via classpath.
-- **Ingestão de Hardware:** Terminais MinMoe Hikvision e Catracas Control iD conectam via TCP direto na porta `50000` de `base-api`.
+- **Topologia Exclusiva de Câmeras IP (6 por Escola):** São 2 câmeras de Entrada, 2 de Saída e 2 de Refeitório (Hikvision ou Dahua). O reconhecimento facial é 100% no hardware da câmera (Edge AI, < 200ms) e o alarme é enviado via TCP direto para a porta `50000` de `base-api`.
 - **Barramento Assíncrono:** RabbitMQ em 2 estágios (`AP_HOM_EVENTO` bruto e tratado) com janela de 5 minutos no Redis para deduplicação.
+

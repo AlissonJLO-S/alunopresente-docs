@@ -35,8 +35,9 @@ O RabbitMQ atua como o barramento assíncrono garantindo tolerância a falhas e 
 1. **Exchange Bruta `AP_HOM_EVENTO` (Fila `evento-bruto-01`):**
    - Consumida por `RabbitMQEventoConsumer` em `base-service`.
    - Persiste o log bruto na tabela de auditoria `base.tb_evento`.
-   - Consulta o Redis: se a chave do aluno na catraca/porta foi registrada há menos de 300 segundos, descarta a duplicata.
+   - Consulta o Redis: se a chave do aluno naquela câmera/acesso (Entrada, Saída ou Refeitório) foi registrada há menos de 300 segundos (5 minutos), descarta a duplicata para evitar reprocessamentos sucessivos.
    - Eventos válidos são categorizados em `IN`, `OUT` ou `REF`.
 2. **Exchange Tratada `AP_HOM_EVENTO_TRATADO`:**
    - **Fila Tratado 01 (`base-service`):** `RabbitMQEventoTratadoConsumer` acumula os eventos em lotes e realiza ingestão em massa via PostgreSQL `COPY` na tabela `base.tb_evento_tratado` (> 5.000 registros/s).
    - **Fila Tratado 02 (`alunopresente-service`):** `RabbitMQNotificacaoAlunoConsumer` despacha mensagens push instantâneas aos pais via Firebase Cloud Messaging (`AppPessoaBufferService`).
+
