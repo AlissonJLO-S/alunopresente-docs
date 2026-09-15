@@ -5172,18 +5172,19 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
         <path data-edge-from="cameras-refeitorio" data-edge-to="base-api" data-edge-label="Refeitório (TCP)" data-edge-key="2" data-edge-id="cam-ref-to-baseapi" data-composition-points="200,250;270,250;270,192.5;340,192.5" d="M 200 250 L 262 250 Q 270 250 270 242 L 270 200.5 Q 270 192.5 278 192.5 L 340 192.5" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
         <path data-edge-from="baseweb" data-edge-to="base-api" data-edge-label="REST &amp; WSS Stream" data-edge-key="3" data-edge-id="bw-to-baseapi" data-composition-points="200,470;270,470;270,192.5;340,192.5" d="M 200 470 L 262 470 Q 270 470 270 462 L 270 200.5 Q 270 192.5 278 192.5 L 340 192.5" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
         <path data-edge-from="educacaoweb" data-edge-to="educacao-api" data-edge-label="REST JSON" data-edge-key="4" data-edge-id="ew-to-educapi" data-composition-points="200,630;270,630;270,552.5;340,552.5" d="M 200 630 L 262 630 Q 270 630 270 622 L 270 560.5 Q 270 552.5 278 552.5 L 340 552.5" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
-        <path data-edge-from="base-api" data-edge-to="rabbitmq" data-edge-label="1. Publica Bruto" data-edge-key="5" data-edge-id="baseapi-to-rmq" data-composition-points="510,199.5;534,199.5;534,215.5;856,215.5;856,198;880,198" d="M 510 199.5 L 526 199.5 Q 534 199.5 534 207.5 L 534 207.5 Q 534 215.5 542 215.5 L 848 215.5 Q 856 215.5 856 207.5 L 856 206 Q 856 198 864 198 L 880 198" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
-        <path data-edge-from="rabbitmq" data-edge-to="base-service" data-edge-label="2. Consome Bruto 01" data-edge-key="6" data-edge-id="rmq-to-basesvc" data-composition-points="880,187;830,187;830,123.66666666666667;780,123.66666666666667" d="M 880 187 L 838 187 Q 830 187 830 179 L 830 131.66666666666669 Q 830 123.66666666666667 822 123.66666666666667 L 780 123.66666666666667" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
-        <path data-edge-from="base-service" data-edge-to="redis" data-edge-label="3. Deduplica 5 min" data-edge-key="7" data-edge-id="basesvc-to-redis" data-composition-points="780,131.33333333333334;830,131.33333333333334;830,337.5;880,337.5" d="M 780 131.33333333333334 L 822 131.33333333333334 Q 830 131.33333333333334 830 139.33333333333334 L 830 329.5 Q 830 337.5 838 337.5 L 880 337.5" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
-        <path data-edge-from="base-service" data-edge-to="rabbitmq" data-edge-label="4. Publica Tratado" data-edge-key="8" data-edge-id="basesvc-to-rmq" data-composition-points="780,116;830,116;830,176;880,176" d="M 780 116 L 822 116 Q 830 116 830 124 L 830 168 Q 830 176 838 176 L 880 176" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
-        <path data-edge-from="rabbitmq" data-edge-to="alunopresente-service" data-edge-label="5. Consome Tratado 02" data-edge-key="9" data-edge-id="rmq-to-alunosvc" data-composition-points="880,209;830,209;830,536;780,536" d="M 880 209 L 838 209 Q 830 209 830 217 L 830 528 Q 830 536 822 536 L 780 536" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
-        <path data-edge-from="alunopresente-service" data-edge-to="firebase" data-edge-label="6. Dispara Push Pais" data-edge-key="10" data-edge-id="alunosvc-to-fcm" data-composition-points="780,564;830,564;830,675;880,675" d="M 780 564 L 822 564 Q 830 564 830 572 L 830 667 Q 830 675 838 675 L 880 675" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
-        <path data-edge-from="base-service" data-edge-to="postgres" data-edge-label="Grava base.evento" data-edge-key="11" data-edge-id="basesvc-to-pg" data-composition-points="780,139;830,139;830,515.5;880,515.5" d="M 780 139 L 822 139 Q 830 139 830 147 L 830 507.5 Q 830 515.5 838 515.5 L 880 515.5" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
-        <path data-edge-from="alunopresente-service" data-edge-to="postgres" data-edge-label="Grava Presenca" data-edge-key="12" data-edge-id="alunosvc-to-pg" data-composition-points="780,550;830,550;830,529.5;880,529.5" d="M 780 550 L 822 550 Q 830 550 830 542 L 830 537.5 Q 830 529.5 838 529.5 L 880 529.5" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
-        <path data-edge-from="base-api" data-edge-to="base-service" data-edge-label="Classpath" data-edge-key="13" data-edge-id="baseapi-embed-basesvc" data-composition-points="510,185.5;555,185.5;555,127.5;600,127.5" d="M 510 185.5 L 547 185.5 Q 555 185.5 555 177.5 L 555 135.5 Q 555 127.5 563 127.5 L 600 127.5" class="a-dashed" stroke-width="1.5" marker-end="url(#arrowhead-dashed)"/>
-        <path data-edge-from="educacao-api" data-edge-to="alunopresente-service" data-edge-label="Classpath" data-edge-key="14" data-edge-id="educapi-embed-alunosvc" data-composition-points="510,552.5;600,552.5" d="M 510 552.5 L 600 552.5" class="a-dashed" stroke-width="1.5" marker-end="url(#arrowhead-dashed)"/>
-        <path data-edge-from="alunopresente-service" data-edge-to="commons-lib" data-edge-label="AppBaseEntity" data-edge-key="15" data-edge-id="alunosvc-to-commons" data-composition-points="690,580;690,660" d="M 690 580 L 690 660" class="a-dashed" stroke-width="1.5" marker-end="url(#arrowhead-dashed)"/>
-        <path data-edge-from="base-service" data-edge-to="cameras-entrada" data-edge-label="Sync FDLib (Faces)" data-edge-key="16" data-edge-id="sync-faces-cam" data-composition-points="690,100;690,41;120,41;120,65" d="M 690 100 L 690 49 Q 690 41 682 41 L 128 41 Q 120 41 120 49 L 120 65" class="a-dashed" stroke-width="1.5" marker-end="url(#arrowhead-dashed)"/>
+        <path data-edge-from="educacao-api" data-edge-to="base-api" data-edge-label="REST Sync (Fotos/Faces)" data-edge-key="5" data-edge-id="educapi-to-baseapi" data-composition-points="425,520;425,225" d="M 425 520 L 425 225" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+        <path data-edge-from="base-api" data-edge-to="rabbitmq" data-edge-label="1. Publica Bruto" data-edge-key="6" data-edge-id="baseapi-to-rmq" data-composition-points="510,199.5;534,199.5;534,215.5;856,215.5;856,198;880,198" d="M 510 199.5 L 526 199.5 Q 534 199.5 534 207.5 L 534 207.5 Q 534 215.5 542 215.5 L 848 215.5 Q 856 215.5 856 207.5 L 856 206 Q 856 198 864 198 L 880 198" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+        <path data-edge-from="rabbitmq" data-edge-to="base-service" data-edge-label="2. Consome Bruto 01" data-edge-key="7" data-edge-id="rmq-to-basesvc" data-composition-points="880,187;830,187;830,123.66666666666667;780,123.66666666666667" d="M 880 187 L 838 187 Q 830 187 830 179 L 830 131.66666666666669 Q 830 123.66666666666667 822 123.66666666666667 L 780 123.66666666666667" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        <path data-edge-from="base-service" data-edge-to="redis" data-edge-label="3. Deduplica 5 min" data-edge-key="8" data-edge-id="basesvc-to-redis" data-composition-points="780,131.33333333333334;830,131.33333333333334;830,337.5;880,337.5" d="M 780 131.33333333333334 L 822 131.33333333333334 Q 830 131.33333333333334 830 139.33333333333334 L 830 329.5 Q 830 337.5 838 337.5 L 880 337.5" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        <path data-edge-from="base-service" data-edge-to="rabbitmq" data-edge-label="4. Publica Tratado" data-edge-key="9" data-edge-id="basesvc-to-rmq" data-composition-points="780,116;830,116;830,176;880,176" d="M 780 116 L 822 116 Q 830 116 830 124 L 830 168 Q 830 176 838 176 L 880 176" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        <path data-edge-from="rabbitmq" data-edge-to="alunopresente-service" data-edge-label="5. Consome Tratado 02" data-edge-key="10" data-edge-id="rmq-to-alunosvc" data-composition-points="880,209;830,209;830,543;780,543" d="M 880 209 L 838 209 Q 830 209 830 217 L 830 535 Q 830 543 822 543 L 780 543" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+        <path data-edge-from="alunopresente-service" data-edge-to="firebase" data-edge-label="6. Dispara Push Pais" data-edge-key="11" data-edge-id="alunosvc-to-fcm" data-composition-points="780,557;830,557;830,675;880,675" d="M 780 557 L 822 557 Q 830 557 830 565 L 830 667 Q 830 675 838 675 L 880 675" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        <path data-edge-from="base-service" data-edge-to="postgres" data-edge-label="Grava base.evento" data-edge-key="12" data-edge-id="basesvc-to-pg" data-composition-points="780,139;830,139;830,522.5;880,522.5" d="M 780 139 L 822 139 Q 830 139 830 147 L 830 514.5 Q 830 522.5 838 522.5 L 880 522.5" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        <path data-edge-from="alunopresente-service" data-edge-to="postgres" data-edge-label="Presenças &amp; Views SQL" data-edge-key="13" data-edge-id="alunosvc-to-pg" data-composition-points="780,550;830,550;830,522.5;880,522.5" d="M 780 550 L 822 550 Q 830 550 830 542 L 830 530.5 Q 830 522.5 838 522.5 L 880 522.5" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+        <path data-edge-from="base-api" data-edge-to="base-service" data-edge-label="Classpath" data-edge-key="14" data-edge-id="baseapi-embed-basesvc" data-composition-points="510,185.5;555,185.5;555,127.5;600,127.5" d="M 510 185.5 L 547 185.5 Q 555 185.5 555 177.5 L 555 135.5 Q 555 127.5 563 127.5 L 600 127.5" class="a-dashed" stroke-width="1.5" marker-end="url(#arrowhead-dashed)"/>
+        <path data-edge-from="educacao-api" data-edge-to="alunopresente-service" data-edge-label="Classpath" data-edge-key="15" data-edge-id="educapi-embed-alunosvc" data-composition-points="510,552.5;600,552.5" d="M 510 552.5 L 600 552.5" class="a-dashed" stroke-width="1.5" marker-end="url(#arrowhead-dashed)"/>
+        <path data-edge-from="alunopresente-service" data-edge-to="commons-lib" data-edge-label="AppBaseEntity" data-edge-key="16" data-edge-id="alunosvc-to-commons" data-composition-points="690,580;690,660" d="M 690 580 L 690 660" class="a-dashed" stroke-width="1.5" marker-end="url(#arrowhead-dashed)"/>
+        <path data-edge-from="base-service" data-edge-to="cameras-entrada" data-edge-label="Sync FDLib (Faces)" data-edge-key="17" data-edge-id="sync-faces-cam" data-composition-points="690,100;690,41;120,41;120,65" d="M 690 100 L 690 49 Q 690 41 682 41 L 128 41 Q 120 41 120 49 L 120 65" class="a-dashed" stroke-width="1.5" marker-end="url(#arrowhead-dashed)"/>
 
         <!-- Components -->
         <g id="node-cameras-entrada" data-node-id="cameras-entrada" data-node-label="2x Câmeras Entrada" tabindex="0" role="button" aria-label="Focus 2x Câmeras Entrada, Hikvision / Dahua (Edge AI), Câmeras IA na Borda (6x por Escola)" aria-pressed="false" data-node-kind="backend" data-node-sublabel="Hikvision / Dahua (Edge AI)" data-node-context="Câmeras IA na Borda (6x por Escola)">
@@ -5380,8 +5381,8 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
         <text data-detail="context" x="970" y="351.5" class="t-muted" font-size="9" text-anchor="middle">Deduplica Face 5m &amp; Tokens</text>
         </g>
 
-        <g id="node-postgres" data-node-id="postgres" data-node-label="PostgreSQL 16" tabindex="0" role="button" aria-label="Focus PostgreSQL 16, Schemas: base, aluno, auth, cad, Broker, Cache &amp; Schemas PostgreSQL, PostgreSQL" aria-pressed="false" data-node-kind="database" data-node-sublabel="Schemas: base, aluno, auth, cad" data-node-context="Broker, Cache &amp; Schemas PostgreSQL" data-node-brand="PostgreSQL" data-node-brand-id="postgresql" data-node-brand-status="preset" data-node-brand-source="https://wiki.postgresql.org/wiki/Logo">
-          <title>PostgreSQL 16 · Schemas: base, aluno, auth, cad · Broker, Cache &amp; Schemas PostgreSQL · PostgreSQL</title>
+        <g id="node-postgres" data-node-id="postgres" data-node-label="PostgreSQL 16" tabindex="0" role="button" aria-label="Focus PostgreSQL 16, base, aluno &amp; integracao_sql, Broker, Cache &amp; Schemas PostgreSQL, PostgreSQL" aria-pressed="false" data-node-kind="database" data-node-sublabel="base, aluno &amp; integracao_sql" data-node-context="Broker, Cache &amp; Schemas PostgreSQL" data-node-brand="PostgreSQL" data-node-brand-id="postgresql" data-node-brand-status="preset" data-node-brand-source="https://wiki.postgresql.org/wiki/Logo">
+          <title>PostgreSQL 16 · base, aluno &amp; integracao_sql · Broker, Cache &amp; Schemas PostgreSQL · PostgreSQL</title>
           <rect x="880" y="490" width="180" height="65" rx="6" class="c-mask"/>
           <rect x="880" y="490" width="180" height="65" rx="6" class="c-database" stroke-width="1.5"/>
           <g aria-hidden="true" data-semantic-sigil="database" class="semantic-sigil s-database" transform="translate(886 496) scale(0.6875)">
@@ -5394,7 +5395,7 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
             <rect width="16" height="16" rx="4" class="brand-mark-frame"/>
           </g>
           <text data-node-label="" data-detail-anchor="" x="970" y="520.5" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">PostgreSQL 16</text>
-        <text data-detail="context" x="970" y="536.5" class="t-muted" font-size="9" text-anchor="middle">Schemas: base, aluno, auth, cad</text>
+        <text data-detail="context" x="970" y="536.5" class="t-muted" font-size="9" text-anchor="middle">base, aluno &amp; integracao_sql</text>
         </g>
 
         <g id="node-firebase" data-node-id="firebase" data-node-label="Firebase FCM" tabindex="0" role="button" aria-label="Focus Firebase FCM, Push Pais / Responsáveis, Broker, Cache &amp; Schemas PostgreSQL" aria-pressed="false" data-node-kind="backend" data-node-sublabel="Push Pais / Responsáveis" data-node-context="Broker, Cache &amp; Schemas PostgreSQL">
@@ -5429,51 +5430,55 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
           <rect x="243.4" y="571.25" width="53.199999999999996" height="14" rx="3" class="c-mask"/>
           <text x="270" y="581.25" class="t-backend" font-size="8" text-anchor="middle">REST JSON</text>
         </g>
-        <g data-detail="context" data-edge-from="base-api" data-edge-to="rabbitmq" data-edge-label="1. Publica Bruto" data-edge-key="5" data-edge-id="baseapi-to-rmq">
+        <g data-detail="context" data-edge-from="educacao-api" data-edge-to="base-api" data-edge-label="REST Sync (Fotos/Faces)" data-edge-key="5" data-edge-id="educapi-to-baseapi">
+          <rect x="364.8" y="360" width="120.39999999999999" height="14" rx="3" class="c-mask"/>
+          <text x="425" y="370" class="t-backend" font-size="8" text-anchor="middle">REST Sync (Fotos/Faces)</text>
+        </g>
+        <g data-detail="context" data-edge-from="base-api" data-edge-to="rabbitmq" data-edge-label="1. Publica Bruto" data-edge-key="6" data-edge-id="baseapi-to-rmq">
           <rect x="490.6" y="142.5" width="86.8" height="14" rx="3" class="c-mask"/>
           <text x="534" y="152.5" class="t-backend" font-size="8" text-anchor="middle">1. Publica Bruto</text>
         </g>
-        <g data-detail="context" data-edge-from="rabbitmq" data-edge-to="base-service" data-edge-label="2. Consome Bruto 01" data-edge-key="6" data-edge-id="rmq-to-basesvc">
+        <g data-detail="context" data-edge-from="rabbitmq" data-edge-to="base-service" data-edge-label="2. Consome Bruto 01" data-edge-key="7" data-edge-id="rmq-to-basesvc">
           <rect x="779.4" y="115.33333333333334" width="101.2" height="14" rx="3" class="c-mask"/>
           <text x="830" y="125.33333333333334" class="t-muted" font-size="8" text-anchor="middle">2. Consome Bruto 01</text>
         </g>
-        <g data-detail="context" data-edge-from="base-service" data-edge-to="redis" data-edge-label="3. Deduplica 5 min" data-edge-key="7" data-edge-id="basesvc-to-redis">
+        <g data-detail="context" data-edge-from="base-service" data-edge-to="redis" data-edge-label="3. Deduplica 5 min" data-edge-key="8" data-edge-id="basesvc-to-redis">
           <rect x="781.8" y="229.41666666666669" width="96.39999999999999" height="14" rx="3" class="c-mask"/>
           <text x="830" y="239.41666666666669" class="t-muted" font-size="8" text-anchor="middle">3. Deduplica 5 min</text>
         </g>
-        <g data-detail="context" data-edge-from="base-service" data-edge-to="rabbitmq" data-edge-label="4. Publica Tratado" data-edge-key="8" data-edge-id="basesvc-to-rmq">
+        <g data-detail="context" data-edge-from="base-service" data-edge-to="rabbitmq" data-edge-label="4. Publica Tratado" data-edge-key="9" data-edge-id="basesvc-to-rmq">
           <rect x="781.8" y="91" width="96.39999999999999" height="14" rx="3" class="c-mask"/>
           <text x="830" y="101" class="t-muted" font-size="8" text-anchor="middle">4. Publica Tratado</text>
         </g>
-        <g data-detail="context" data-edge-from="rabbitmq" data-edge-to="alunopresente-service" data-edge-label="5. Consome Tratado 02" data-edge-key="9" data-edge-id="rmq-to-alunosvc">
-          <rect x="774.6" y="372.5" width="110.8" height="14" rx="3" class="c-mask"/>
-          <text x="830" y="382.5" class="t-backend" font-size="8" text-anchor="middle">5. Consome Tratado 02</text>
+        <g data-detail="context" data-edge-from="rabbitmq" data-edge-to="alunopresente-service" data-edge-label="5. Consome Tratado 02" data-edge-key="10" data-edge-id="rmq-to-alunosvc">
+          <rect x="774.6" y="376" width="110.8" height="14" rx="3" class="c-mask"/>
+          <text x="830" y="386" class="t-backend" font-size="8" text-anchor="middle">5. Consome Tratado 02</text>
         </g>
-        <g data-detail="context" data-edge-from="alunopresente-service" data-edge-to="firebase" data-edge-label="6. Dispara Push Pais" data-edge-key="10" data-edge-id="alunosvc-to-fcm">
-          <rect x="777" y="614.5" width="106" height="14" rx="3" class="c-mask"/>
-          <text x="830" y="624.5" class="t-muted" font-size="8" text-anchor="middle">6. Dispara Push Pais</text>
+        <g data-detail="context" data-edge-from="alunopresente-service" data-edge-to="firebase" data-edge-label="6. Dispara Push Pais" data-edge-key="11" data-edge-id="alunosvc-to-fcm">
+          <rect x="777" y="611" width="106" height="14" rx="3" class="c-mask"/>
+          <text x="830" y="621" class="t-muted" font-size="8" text-anchor="middle">6. Dispara Push Pais</text>
         </g>
-        <g data-detail="context" data-edge-from="base-service" data-edge-to="postgres" data-edge-label="Grava base.evento" data-edge-key="11" data-edge-id="basesvc-to-pg">
-          <rect x="784.2" y="322.25" width="91.6" height="14" rx="3" class="c-mask"/>
-          <text x="830" y="332.25" class="t-muted" font-size="8" text-anchor="middle">Grava base.evento</text>
+        <g data-detail="context" data-edge-from="base-service" data-edge-to="postgres" data-edge-label="Grava base.evento" data-edge-key="12" data-edge-id="basesvc-to-pg">
+          <rect x="784.2" y="325.75" width="91.6" height="14" rx="3" class="c-mask"/>
+          <text x="830" y="335.75" class="t-muted" font-size="8" text-anchor="middle">Grava base.evento</text>
         </g>
-        <g data-detail="context" data-edge-from="alunopresente-service" data-edge-to="postgres" data-edge-label="Grava Presenca" data-edge-key="12" data-edge-id="alunosvc-to-pg">
-          <rect x="791.4" y="504.75" width="77.2" height="14" rx="3" class="c-mask"/>
-          <text x="830" y="514.75" class="t-backend" font-size="8" text-anchor="middle">Grava Presenca</text>
+        <g data-detail="context" data-edge-from="alunopresente-service" data-edge-to="postgres" data-edge-label="Presenças &amp; Views SQL" data-edge-key="13" data-edge-id="alunosvc-to-pg">
+          <rect x="784.6" y="585" width="110.8" height="14" rx="3" class="c-mask"/>
+          <text x="840" y="595" class="t-backend" font-size="8" text-anchor="middle">Presenças &amp; Views SQL</text>
         </g>
-        <g data-detail="context" data-edge-from="base-api" data-edge-to="base-service" data-edge-label="Classpath" data-edge-key="13" data-edge-id="baseapi-embed-basesvc">
+        <g data-detail="context" data-edge-from="base-api" data-edge-to="base-service" data-edge-label="Classpath" data-edge-key="14" data-edge-id="baseapi-embed-basesvc">
           <rect x="528.4" y="116.5" width="53.199999999999996" height="14" rx="3" class="c-mask"/>
           <text x="555" y="126.5" class="t-messagebus" font-size="8" text-anchor="middle">Classpath</text>
         </g>
-        <g data-detail="context" data-edge-from="educacao-api" data-edge-to="alunopresente-service" data-edge-label="Classpath" data-edge-key="14" data-edge-id="educapi-embed-alunosvc">
+        <g data-detail="context" data-edge-from="educacao-api" data-edge-to="alunopresente-service" data-edge-label="Classpath" data-edge-key="15" data-edge-id="educapi-embed-alunosvc">
           <rect x="528.4" y="512.5" width="53.199999999999996" height="14" rx="3" class="c-mask"/>
           <text x="555" y="522.5" class="t-messagebus" font-size="8" text-anchor="middle">Classpath</text>
         </g>
-        <g data-detail="context" data-edge-from="alunopresente-service" data-edge-to="commons-lib" data-edge-label="AppBaseEntity" data-edge-key="15" data-edge-id="alunosvc-to-commons">
+        <g data-detail="context" data-edge-from="alunopresente-service" data-edge-to="commons-lib" data-edge-label="AppBaseEntity" data-edge-key="16" data-edge-id="alunosvc-to-commons">
           <rect x="653.8" y="584" width="72.4" height="14" rx="3" class="c-mask"/>
           <text x="690" y="594" class="t-messagebus" font-size="8" text-anchor="middle">AppBaseEntity</text>
         </g>
-        <g data-detail="context" data-edge-from="base-service" data-edge-to="cameras-entrada" data-edge-label="Sync FDLib (Faces)" data-edge-key="16" data-edge-id="sync-faces-cam">
+        <g data-detail="context" data-edge-from="base-service" data-edge-to="cameras-entrada" data-edge-label="Sync FDLib (Faces)" data-edge-key="17" data-edge-id="sync-faces-cam">
           <rect x="356.8" y="1" width="96.39999999999999" height="14" rx="3" class="c-mask"/>
           <text x="405" y="11" class="t-messagebus" font-size="8" text-anchor="middle">Sync FDLib (Faces)</text>
         </g>
@@ -5739,11 +5744,11 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
       <div class="card">
         <div class="card-header">
           <div class="card-dot amber"></div>
-          <h3>Sincronização Reversa &amp; Alta Performance</h3>
+          <h3>Comunicação Base ⇄ Educação (REST &amp; Views)</h3>
         </div>
         <ul>
-          <li>&bull; Fotos cadastradas no sistema são injetadas na flash das 6 câmeras via ISAPI</li>
-          <li>&bull; Persistência em massa no PostgreSQL via COPY (tb_evento_tratado)</li>
+          <li>&bull; REST HTTP: educacao-api envia fotos ao base-api (/api/faces/incluirFaceUpload-integracao)</li>
+          <li>&bull; Views SQL: schema integracao_sql cruza faces e unidades + query em base.tb_evento_tratado</li>
         </ul>
       </div>
     </div>
