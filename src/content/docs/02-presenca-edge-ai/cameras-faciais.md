@@ -22,3 +22,8 @@ O sistema **não utiliza terminais MinMoe nem catracas eletrônicas**. O ecossis
 3. **Matching 1:N Ultra Rápido (&lt; 200ms):** Ao transitar na entrada, saída ou refeitório, a própria câmera detecta o rosto e compara contra sua biblioteca interna de alunos.
 4. **Disparo Imediato do Alarme:** Ao confirmar o match com similaridade acima do limiar (ex: 80%), a câmera dispara o evento via TCP para a porta `50000` de `base-api`, contendo matrícula, similaridade, timestamp e recorte da face.
 
+:::note[🚌 E os terminais faciais nos Ônibus?]
+No módulo de Transporte Escolar, o modelo **Hikvision DS-K1T673DX-BR** é utilizado **exclusivamente na porta de entrada dos ônibus escolares** para registrar o embarque dos alunos (com memória local e tolerância a ausência de sinal de internet). Nas escolas, a infraestrutura é composta **100% pelas 6 câmeras IP** (sem catracas e sem terminais).
+:::
+
+
