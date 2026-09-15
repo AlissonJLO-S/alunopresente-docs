@@ -7,6 +7,25 @@ description: Mapeamento detalhado das 4 APIs executáveis Spring Boot, 8 bibliot
 
 O sistema **não opera em um pipeline linear**. Trata-se de uma arquitetura modular orientada a eventos (*Event-Driven Architecture*), combinando servidores TCP de baixa latência, mensageria RabbitMQ assíncrona em 2 estágios, deduplicação biométrica em Redis, banco de dados PostgreSQL multi-schema e integração cruzada entre SPAs Angular e APIs Spring Boot.
 
+<div class="diagram-container">
+  <div class="diagram-header">
+    <div class="diagram-title">
+      <span>🏛️</span> Diagrama Arquitetural Oficial (SVG Interativo Standalone)
+    </div>
+    <div class="diagram-actions">
+      <a href="/diagrams/monorepo-architecture.html" target="_blank" class="diagram-btn">
+        ↗ Abrir Isolado
+      </a>
+      <button onclick="document.getElementById('frame-topo-embed').requestFullscreen()" class="diagram-btn">
+        ⛶ Tela Cheia
+      </button>
+    </div>
+  </div>
+  <iframe id="frame-topo-embed" src="/diagrams/monorepo-architecture.html" class="diagram-frame"></iframe>
+</div>
+
+---
+
 ### 📦 Separação Canônica de Módulos
 
 ```
