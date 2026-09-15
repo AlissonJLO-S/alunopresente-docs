@@ -1,0 +1,17 @@
+{
+  "name": "alunopresente-docs",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Portal e Visualizador de Documentação Técnica e Arquitetura - Ecossistema Aluno Presente",
+  "scripts": {
+    "dev": "astro dev --port 4321",
+    "start": "astro dev --port 4321",
+    "build": "astro build",
+    "preview": "astro preview --port 4321",
+    "sync": "node scripts/sync-docs.mjs"
+  },
+  "dependencies": {
+    "@astrojs/starlight": "^0.28.0",
+    "astro": "^4.15.0"
+  }
+}
