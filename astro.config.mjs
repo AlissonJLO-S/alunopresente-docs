@@ -63,6 +63,7 @@ export default defineConfig({
             { label: '⏱️ 3. Sequência Facial (Sequence)', slug: '06-diagramas-interativos/03-sequencia-facial' },
             { label: '🔀 4. Workflow de Decisão (Workflow)', slug: '06-diagramas-interativos/04-workflow-decisao' },
             { label: '📹 5. Streaming CFTV (Pipeline)', slug: '06-diagramas-interativos/05-streaming-cftv' },
+            { label: '📬 6. Pipeline RabbitMQ (Dataflow)', slug: '06-diagramas-interativos/06-pipeline-rabbitmq' },
           ],
         },
       ],
