@@ -14,3 +14,4 @@ description: Regras de ouro do monorepo, commons-lib e tenant isolation
    - Proibido MapStruct / ModelMapper.
    - Proibido `ex.printStackTrace()` (use SLF4J `LoggerFactory`).
    - Proibido lançar `RuntimeException` genérico (use `RegraDeNegocioException`).
+5. **Integração Base ⇄ Educação:** Proibido `@ManyToOne` entre entidades de schemas diferentes (`alunopresente` e `base`). Use REST HTTP (`IntegracaoBaseService`) para envio de mídias e comandos em hardware, e Views SQL (`integracaosql`) com Timers agendados para reconciliação contínua. Consulte [Comunicação Base ⇄ Educação](/01-arquitetura/comunicacao-base-educacao/).
