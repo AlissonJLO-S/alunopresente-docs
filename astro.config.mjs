@@ -22,6 +22,7 @@ export default defineConfig({
             { label: '2. Servidor Netty TCP :50000', slug: '01-arquitetura/netty-tcp' },
             { label: '3. Mensageria RabbitMQ (2 Estágios)', slug: '01-arquitetura/mensageria-rabbitmq' },
             { label: '4. Multi-Schema PostgreSQL & Redis', slug: '01-arquitetura/persistencia-cache' },
+            { label: '5. Comunicação Base ⇄ Educação (REST vs Views)', slug: '01-arquitetura/comunicacao-base-educacao' },
           ],
         },
         {
