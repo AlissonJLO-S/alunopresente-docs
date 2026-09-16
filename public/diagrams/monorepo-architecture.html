@@ -5085,7 +5085,7 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
       </div>
     </div>
 
-    <script id="archify-guided-views-data" type="application/json">[{"id":"full-topology","label":"Topologia Não-Linear Completa","focus":["cameras-entrada","cameras-saida","cameras-refeitorio","baseweb","educacaoweb","base-api","educacao-api","base-service","integracao-sql","alunopresente-service","rabbitmq","redis","postgres","firebase"],"note":"1 Kit = 6 Câmeras IA (2 Ent, 2 Saída, 2 Refeitório), 1-2 Kits/Escola, Netty TCP :50000, RabbitMQ 2 estágios, Redis e PG."},{"id":"biometric-pipeline","label":"Pipeline Biométrico \u0026 Presença","focus":["cameras-entrada","cameras-saida","cameras-refeitorio","base-api","rabbitmq","base-service","redis","alunopresente-service","postgres","firebase"],"note":"Câmeras fazem match na borda (FDLib), despacham alarme Netty TCP :50000 para base-api e computam presenças, saídas e refeições."},{"id":"cftv-streaming","label":"Streaming de Câmeras IP","focus":["cameras-entrada","cameras-saida","cameras-refeitorio","baseweb","base-api","base-service"],"note":"Túnel WebSocket reverso, controle de backpressure Java NIO e decodificação WASM/MSE no browser."}]</script>
+    <script id="archify-guided-views-data" type="application/json">[{"id":"full-topology","label":"Topologia Não-Linear Completa","focus":["cameras-kit","baseweb","educacaoweb","base-api","educacao-api","base-service","integracao-sql","alunopresente-service","rabbitmq","redis","postgres","firebase"],"note":"1 Kit = 6 Câmeras IA (2 Ent + 2 Saída + 2 Refeitório), 1-2 Kits/Escola. Netty TCP, RabbitMQ 2 estágios."},{"id":"biometric-pipeline","label":"Pipeline Biométrico \u0026 Presença","focus":["cameras-kit","base-api","rabbitmq","base-service","redis","alunopresente-service","postgres","firebase"],"note":"Câmeras fazem match na borda (FDLib), alarme TCP :50000 para base-api, presença e refeições."},{"id":"cftv-streaming","label":"Streaming de Câmeras IP","focus":["cameras-kit","baseweb","base-api","base-service"],"note":"Túnel WebSocket reverso, backpressure Java NIO e decodificação WASM/MSE no browser."}]</script>
 
     <script id="archify-i18n-data" type="application/json">{"locale":"en","messages":{"viewer.kind.frontend":"Frontend","viewer.kind.backend":"Backend","viewer.kind.database":"Database","viewer.kind.cloud":"Cloud","viewer.kind.security":"Security","viewer.kind.messagebus":"Message bus","viewer.kind.external":"External","viewer.kind.neutral":"Neutral","viewer.kind.node":"Node","viewer.kind.start":"Start","viewer.kind.active":"Active","viewer.kind.waiting":"Waiting","viewer.kind.decision":"Decision","viewer.kind.success":"Success","viewer.kind.failure":"Failure","viewer.toolbar.actions":"Diagram actions","viewer.theme.toggle.title":"Toggle theme (T)","viewer.theme.toggle":"Toggle color theme","viewer.theme.dark":"Dark","viewer.theme.light":"Light","viewer.preset.choose.title":"Choose visual style (S cycles)","viewer.preset.choose":"Choose visual style","viewer.preset.style":"Style","viewer.preset.menu":"Visual style","viewer.preset.identity":"Visual identity","viewer.preset.cycles":"S cycles","viewer.preset.classic":"Classic","viewer.preset.classic.short":"Classic","viewer.preset.classic.hint":"Stable technical default","viewer.preset.flow":"Signal Flow","viewer.preset.flow.short":"Flow","viewer.preset.flow.hint":"Motion-forward presentation","viewer.preset.blueprint":"Blueprint","viewer.preset.blueprint.hint":"Engineering review","viewer.preset.editorial":"Editorial","viewer.preset.editorial.hint":"Publication and launch notes","viewer.preset.badge.signalFlow":"SIGNAL FLOW","viewer.preset.badge.blueprint":"BLUEPRINT / REV 01","viewer.preset.badge.editorial":"EDITORIAL / FIELD NOTE","viewer.preset.badge.editorialPlate":"ARCHIFY / PLATE 04","viewer.preset.current":"Visual style: {style}. Choose visual style","viewer.motion.live":"Live","viewer.motion.still":"Still","viewer.motion.pause":"Pause motion","viewer.motion.resume":"Resume motion","viewer.motion.reduced":"Motion paused by reduced-motion preference","viewer.motion.hidden":"Motion paused while this page is hidden","viewer.motion.yielding":"Pause motion; currently yielding to {owner}","viewer.motion.yielding.title":"Live preview enabled · yielding to {owner}","viewer.owner.story":"the guided story","viewer.owner.chapter":"the active chapter","viewer.owner.chapterPreview":"the chapter delta preview","viewer.owner.handoff":"the chapter handoff","viewer.owner.route":"Route Probe","viewer.owner.lens":"Semantic Lens","viewer.owner.relationship":"Relationship Preview","viewer.owner.intent":"Intent Trace","viewer.owner.focus":"semantic focus","viewer.owner.legend":"legend preview","viewer.owner.reader":"reader interaction","viewer.present.enter":"Enter presentation stage","viewer.present.enter.title":"Presentation stage (F)","viewer.present.exit":"Exit presentation stage","viewer.present.exit.title":"Exit presentation stage (F or Escape)","viewer.present.present":"Present","viewer.present.exit.label":"Exit","viewer.export.button":"Export","viewer.export.button.title":"Export diagram (E)","viewer.export.diagram":"Export diagram","viewer.export.menu":"Export","viewer.export.subtitle":"Portable, clean outputs","viewer.export.share":"Share","viewer.export.shareCard":"Share Card","viewer.export.routeShareCard":"Route Share Card","viewer.export.reachShareCard":"Reach Share Card","viewer.export.copyShareCard":"Copy Share Card","viewer.export.copyDiagram":"Copy diagram","viewer.export.clipboardPng":"PNG to clipboard","viewer.export.raster":"Raster images","viewer.export.image":"Image","viewer.export.lossless":"Lossless image","viewer.export.compact":"Compact image","viewer.export.modern":"Modern image","viewer.export.vectorMotion":"Vector and motion","viewer.export.vectorMotion.heading":"Vector \u0026 motion","viewer.export.editable":"Editable vector","viewer.export.motion6s":"6s motion","viewer.export.unsupported":"Not supported by this browser","viewer.export.clipboardUnsupported":"Clipboard image write not supported by this browser","viewer.export.clipboardUnsupported.period":"Clipboard image write not supported by this browser.","viewer.export.clipboardUnsupported.short":"Clipboard image write not supported in this browser.","viewer.export.motionUnavailable":"Motion capture unavailable in this browser","viewer.export.webmUnavailable":"WebM unavailable in this browser","viewer.export.failed":"Export failed: {message}","viewer.export.unknownVariant":"Unknown Share Card variant: {variant}","viewer.export.routeRequired":"Trace a route before exporting a Route Share Card","viewer.export.reachRequired":"Trace authored reach before exporting a Reach Share Card","viewer.export.unknown":"unknown","viewer.export.routeFailed":"Route Share Card export failed: {message}","viewer.export.reachFailed":"Reach Share Card export failed: {message}","viewer.export.copyFailed":"Copy failed: {message}","viewer.export.copiedPng":"Copied PNG to clipboard","viewer.export.copiedShare":"Copied Share Card","viewer.export.downloadedShare":"Downloaded Share Card","viewer.export.downloadedRoute":"Downloaded Route Share Card","viewer.export.downloadedReach":"Downloaded Reach Share Card","viewer.export.downloadedWebm":"Downloaded WebM","viewer.export.recording":"Recording 6 seconds of motion…","viewer.export.card.routeSummary.one":"Route: {source} → {target} · {count} directed hop","viewer.export.card.routeSummary.other":"Route: {source} → {target} · {count} directed hops","viewer.export.card.reachSummary":"Authored {direction} from {origin} · {nodes} · {links} · max {hops}","viewer.export.card.node.one":"{count} node","viewer.export.card.node.other":"{count} nodes","viewer.export.card.link.one":"{count} link","viewer.export.card.link.other":"{count} links","viewer.export.card.hop.one":"{count} hop","viewer.export.card.hop.other":"{count} hops","viewer.export.card.routeBadge":"ARCHIFY · ROUTE · {hops}","viewer.export.card.reachBadge":"ARCHIFY · {direction} REACH","viewer.export.card.defaultBadge":"ARCHIFY · {preset} · {theme}","viewer.export.direction.upstream":"Upstream","viewer.export.direction.downstream":"Downstream","viewer.export.error.canvasUnavailable":"Canvas unavailable for {label}","viewer.export.error.contextUnavailable":"2D canvas context unavailable for {label}","viewer.export.error.toBlobUnavailable":"canvas.toBlob unavailable for {label}","viewer.export.error.toBlobNull":"canvas.toBlob returned no data for {label}","viewer.export.error.variantsCombined":"Share Card variants cannot be combined","viewer.export.error.viewerState":"Share Card export could not remove temporary viewer state","viewer.export.error.routeState":"Route Card export could not preserve the resolved route safely","viewer.export.error.reachState":"Reach Card export could not preserve authored reach safely","viewer.export.error.webmRequirements":"WebM motion export requires a trace animation and browser MediaRecorder support","viewer.export.error.mediaRecorder":"MediaRecorder failed","viewer.export.error.emptyWebm":"MediaRecorder produced an empty WebM","viewer.export.error.webmBackground":"SVG background could not be loaded for WebM export","viewer.guided.region":"Guided diagram views","viewer.guided.previous":"Previous guided view","viewer.guided.previous.title":"Previous guided view ([)","viewer.guided.next":"Next guided view","viewer.guided.next.title":"Next guided view (])","viewer.guided.views":"Guided views","viewer.guided.explore":"Explore this system","viewer.guided.intro":"Step through curated paths without changing the source diagram.","viewer.guided.trail":"Story trail","viewer.guided.beat":"Beat","viewer.guided.nextBeat":"Next","viewer.guided.play":"Play guided story","viewer.guided.play.title":"Play guided story (P)","viewer.guided.pause":"Pause guided story","viewer.guided.pause.title":"Pause guided story (P)","viewer.guided.replay":"Replay guided story","viewer.guided.replay.title":"Replay guided story (P)","viewer.guided.playStory":"Play story","viewer.guided.pauseStory":"Pause","viewer.guided.replayStory":"Replay story","viewer.guided.motionUnavailable":"Story playback unavailable while motion is Still","viewer.guided.enableMotion":"Switch motion to Live to play the guided story","viewer.guided.selectBeatLink":"Select a Story Beat to copy its exact link","viewer.guided.copyMoment":"Copy moment","viewer.guided.momentCopied":"Moment link copied","viewer.guided.momentCopyFailed":"Could not copy story moment link","viewer.guided.copied":"Copied","viewer.guided.copyFailed":"Copy failed","viewer.guided.showAll":"Show all","viewer.guided.showAll.aria":"Show entire diagram","viewer.guided.chapters":"Story chapters","viewer.guided.storyTrail":"Story trail for {label}: {count} beats","viewer.guided.chapter.open":"Open chapter {index} of {total}: {label}, {count} stops","viewer.guided.chapter.current":"Current chapter {index} of {total}: {label}, {count} stops","viewer.guided.chapter.selectedNodes":"{count} selected nodes","viewer.guided.chapter.stops":"{count} stops","viewer.guided.chapter.stop.one":"{count} stop","viewer.guided.chapter.stop.other":"{count} stops","viewer.guided.chapter.current.title":"{label} — current chapter, {count} stops","viewer.guided.chapter.delta.expanded":"{stay} stay, {enter} enter, {leave} leave","viewer.guided.chapter.delta.aria":"Open chapter {index} of {total}: {label}. Chapter focus delta: {delta}","viewer.guided.chapter.delta.title":"{label} — {delta} chapter focus","viewer.guided.handoff":"{from} → {to} · via {label}","viewer.guided.share.chapter":"Chapter {index} / {total}","viewer.guided.share.initial":"Chapter 01 / 01","viewer.guided.share.default":"Guided chapter","viewer.guided.state.ready":"Ready","viewer.guided.state.playing":"Playing","viewer.guided.state.settled":"Settled","viewer.guided.state.paused":"Paused","viewer.guided.state.pinned":"Pinned","viewer.guided.state.still":"Still","viewer.guided.share.step":"Step {index} / {total} · {label}","viewer.guided.share.staticMoment":"{step} · Static moment","viewer.guided.share.complete":"{count} steps complete · {note}","viewer.guided.share.settled":"Path settled for reading.","viewer.guided.share.staticPath":"{count} steps · Static path","viewer.guided.share.ready":"{count} steps · Ready","viewer.guided.share.aria":"{state} chapter {index} of {total}: {label}. {beat}. {route}","viewer.guided.beat.start":"Beat {index} / {total} · {label} · starting point","viewer.guided.beat.forward":"Beat {index} / {total} · {from} → {to}","viewer.guided.beat.reverse":"Beat {index} / {total} · {from} → {to} · reverse authored link","viewer.guided.beat.multiple":"Beat {index} / {total} · {from} ⇄ {to} · {count} authored links","viewer.guided.beat.group":"Beat {index} / {total} · {from} · {to} · grouped · no direct link","viewer.guided.beat.aria.prefix":"Story beat {index} of {total}: {label}. ","viewer.guided.beat.aria.start":"Starting point.","viewer.guided.beat.aria.forward":"From {from} through one authored forward relationship.","viewer.guided.beat.aria.reverse":"From {from}; the authored relationship points from {to} to {from}.","viewer.guided.beat.aria.multiple":"From {from} through {count} authored relationships; shown without arbitrary motion.","viewer.guided.beat.aria.group":"Grouped from {from} with no direct authored relationship.","viewer.guided.caption.start":"Starting point","viewer.guided.caption.grouped":"Grouped transition · no direct authored link","viewer.guided.caption.more":" +{count} more","viewer.guided.caption.reverse":"Reverse authored relationship","viewer.guided.caption.relationships":"{count} authored relationships","viewer.guided.caption.relationship":"Authored relationship","viewer.guided.caption.direction":"authored direction: {from} → {to}","viewer.guided.caption.starting":"Authored starting point","viewer.guided.beatLink":"Copy link to current story moment: Beat {index} of {total}: {label}","viewer.guided.noStory":"This diagram has no authored guided story.","viewer.guide.eyebrow":"Diagram guide","viewer.guide.close":"Close diagram guide","viewer.guide.inspecting":"Inspecting compiled semantics","viewer.guide.actions":"Diagram exploration actions","viewer.guide.find":"Find any node","viewer.guide.find.hint":"Search labels, responsibilities, kinds, and stable IDs.","viewer.guide.route":"Trace a route","viewer.guide.route.aria":"Trace a directed route","viewer.guide.route.hint":"Ask how two semantic nodes connect in authored direction.","viewer.guide.map":"See the whole system","viewer.guide.map.hint":"Open Semantic Radar with a live viewport and stable nodes.","viewer.guide.lens":"Compare semantic kinds","viewer.guide.lens.hint":"Count roles, reveal their traffic, and compare direct authored links.","viewer.guide.story":"Play the guided story","viewer.guide.story.hint":"Walk the authored chapters and real relationships.","viewer.guide.present":"Enter Presentation Stage","viewer.guide.present.hint":"Give the live diagram the viewport without changing export.","viewer.guide.shortcuts":"Additional keyboard shortcuts","viewer.guide.shortcut.export":"Export","viewer.guide.shortcut.theme":"Theme","viewer.guide.shortcut.style":"Style","viewer.guide.shortcut.reset":"Reset","viewer.guide.shortcut.zoomIn":"Zoom in","viewer.guide.shortcut.zoomOut":"Zoom out","viewer.guide.shortcut.close":"Close","viewer.guide.facts":"{nodes} · {relationships} · {views}","viewer.guide.fact.node.one":"{count} semantic node","viewer.guide.fact.node.other":"{count} semantic nodes","viewer.guide.fact.relationship.one":"{count} relationship","viewer.guide.fact.relationship.other":"{count} relationships","viewer.guide.fact.view.one":"{count} guided view","viewer.guide.fact.view.other":"{count} guided views","viewer.guide.story.available.one":"Walk {count} authored chapter and its real relationships.","viewer.guide.story.available.other":"Walk {count} authored chapters and their real relationships.","viewer.guide.story.unavailable":"No authored guided story in this diagram.","viewer.guide.open":"Open diagram guide","viewer.guide.noStory":"This diagram has no authored guided story.","viewer.finder.title":"Find a node","viewer.finder.close":"Close node finder","viewer.finder.placeholder":"Search labels or IDs","viewer.finder.search":"Search diagram nodes","viewer.finder.results":"Diagram nodes","viewer.finder.empty":"No matching nodes","viewer.finder.result.focus":"Focus {label}","viewer.finder.result.routeStart":"Choose {label} as route start","viewer.finder.result.routeTarget":"Choose {label} as route destination, {links}","viewer.finder.status.empty":"No matching nodes","viewer.finder.status.count.one":"{count} matching node","viewer.finder.status.count.other":"{count} matching nodes","viewer.finder.noun.nodes":"nodes","viewer.finder.link.one":"{count} link","viewer.finder.link.other":"{count} links","viewer.finder.result.focus.one":"Focus {label}, {count} related connection","viewer.finder.result.focus.other":"Focus {label}, {count} related connections","viewer.finder.status.filtered":"{visible} of {available} {noun}","viewer.finder.status.all":"{available} {noun}","viewer.passport.eyebrow":"Semantic passport","viewer.passport.metadata":"Node metadata","viewer.passport.evidence":"Verified source evidence","viewer.passport.verified":"Verified source","viewer.passport.verificationScope":"Verified against local Git at the pinned revision. Remote access has not been checked.","viewer.passport.reach":"Authored reach","viewer.passport.reach.trace":"Trace authored reachability","viewer.passport.upstream":"Upstream","viewer.passport.downstream":"Downstream","viewer.passport.upstream.trace":"Trace upstream authored reachability","viewer.passport.downstream.trace":"Trace downstream authored reachability","viewer.passport.close":"Close semantic passport","viewer.passport.copy":"Copy link","viewer.passport.copy.focus":"Copy link to focused node","viewer.passport.relations":"Relations","viewer.passport.relations.show":"Show connected relationships","viewer.passport.relations.hide":"Hide connected relationships","viewer.passport.relations.list":"Connected relationships","viewer.passport.copyRelation":"Copy relation","viewer.passport.copyNode":"Copy node","viewer.passport.copyPinned":"Copy link to pinned relationship","viewer.passport.copySource":"Copy link to source node","viewer.passport.copy.focused.success":"Focused node link copied","viewer.passport.copy.pinned.success":"Pinned relationship link copied","viewer.passport.copy.focused.failed":"Could not copy focused node link","viewer.passport.copy.pinned.failed":"Could not copy pinned relationship link","viewer.passport.relationship.none":"No connected relationships","viewer.passport.relationship.count.one":"{count} relation","viewer.passport.relationship.count.other":"{count} relations","viewer.passport.relationship.show.one":"Show {count} connected relationship","viewer.passport.relationship.show.other":"Show {count} connected relationships","viewer.passport.relationship.summary":"{out} outgoing · {in} incoming{loops}","viewer.passport.relationship.loops":" · {count} loop","viewer.passport.relationship.explorer":"Direct relationship explorer","viewer.passport.relationship.help":"Use arrow keys to explore relationships. Press Enter or Space to pin details; Escape clears.","viewer.passport.relationship.loopsBack":"loops back","viewer.passport.relationship.connectsTo":"connects to","viewer.passport.relationship.connectsFrom":"connects from","viewer.passport.relationship.pinned":"Pinned relationship · {from} → {to} · {label}","viewer.passport.relationship.inspect":"Inspect relationship {index} of {total}: {from} to {to}, {label}. Press Enter for details.","viewer.passport.relationship.group.out":"Outgoing","viewer.passport.relationship.group.in":"Incoming","viewer.passport.relationship.group.loop":"Self loops","viewer.passport.relationship.row":"{group}: {relationship}, {neighbor}","viewer.passport.relationship.direction.out":"OUT →","viewer.passport.relationship.direction.in":"← IN","viewer.passport.relationship.direction.loop":"LOOP","viewer.passport.sourceCount.one":"{count} verified source reference","viewer.passport.sourceCount.other":"{count} verified source references","viewer.passport.sourceMarker":"SRC","viewer.passport.beacon.one":"{count} verified source; focus this node to inspect","viewer.passport.beacon.other":"{count} verified sources; focus this node to inspect","viewer.passport.repository.open":"Open verified repository revision {revision}","viewer.passport.source.open":"Open verified source {path} at revision {revision}","viewer.passport.source.openLink":"Open ↗","viewer.passport.reach.upstream.one":"Trace {count} upstream authored node","viewer.passport.reach.upstream.other":"Trace {count} upstream authored nodes","viewer.passport.reach.downstream.one":"Trace {count} downstream authored node","viewer.passport.reach.downstream.other":"Trace {count} downstream authored nodes","viewer.passport.reach.noUpstream":"No upstream authored nodes","viewer.passport.reach.noDownstream":"No downstream authored nodes","viewer.passport.reach.status":"{direction} · {nodes} nodes · {links} links · max {hops} hops","viewer.route.eyebrow":"Route probe","viewer.route.start":"Choose a start node","viewer.route.start.find":"Find start","viewer.route.start.find.aria":"Find a route start","viewer.route.copy":"Copy link","viewer.route.copy.aria":"Copy link to traced route","viewer.route.clear":"Clear","viewer.route.clear.aria":"Clear route probe","viewer.route.traced":"Traced route","viewer.route.pickTwo":"Pick two semantic nodes on the diagram","viewer.route.pickOne":"Pick a semantic node on the diagram","viewer.route.controls":"Route journey controls","viewer.route.previous":"Previous route position","viewer.route.play":"Play route journey","viewer.route.pause":"Pause route journey","viewer.route.replay":"Replay route journey","viewer.route.next":"Next route position","viewer.route.journey":"Journey","viewer.route.pause.label":"Pause","viewer.route.replay.label":"Replay","viewer.route.overview":"Overview","viewer.route.overview.aria":"Show complete route overview","viewer.route.instructions":"Choose the source, then the destination. Direction matters.","viewer.route.destination":"Choose a destination from {label}","viewer.route.destination.find":"Find target","viewer.route.destination.find.aria":"Find a reachable route destination","viewer.route.differentDestination":"Choose a different destination","viewer.route.distinct":"A route needs two distinct semantic nodes.","viewer.route.unreachable":"No directed route to {label}","viewer.route.unreachable.detail":"{target} is not reachable from {source}. Pick a highlighted destination.","viewer.route.start.instructions":"Select the source. The next step will reveal only directed destinations.","viewer.route.copy.success":"Traced route link copied","viewer.route.copy.failed":"Could not copy traced route link","viewer.route.position":"Route position {index} of {total}: {label}","viewer.route.step":"Step {index} of {total} · {phase} · {label}","viewer.route.motionRequired":"Automatic journey requires Live motion","viewer.route.trigger.clear":"Clear traced route","viewer.route.overview.status":"{nodes} · {hops} · shortest authored route","viewer.route.overview.node.one":"{count} node","viewer.route.overview.node.other":"{count} nodes","viewer.route.overview.hop.one":"{count} directed hop","viewer.route.overview.hop.other":"{count} directed hops","viewer.route.phase.playing":"Playing","viewer.route.phase.complete":"Complete","viewer.route.phase.inspecting":"Inspecting","viewer.route.destination.count.one":"{count} directed destination available. Pick a highlighted node.","viewer.route.destination.count.other":"{count} directed destinations available. Pick a highlighted node.","viewer.route.noOutgoing":"No outgoing route starts here. Clear and choose another source.","viewer.route.result.title":"{source} to {target}","viewer.route.finder.source.title":"Choose route start","viewer.route.finder.source.placeholder":"Search route sources","viewer.route.finder.source.empty":"No matching route sources","viewer.route.finder.source.results":"Nodes that can start a route","viewer.route.finder.source.noun":"route sources","viewer.route.finder.source.badge":"start","viewer.route.finder.target.title":"Destination from {label}","viewer.route.finder.target.placeholder":"Search reachable destinations","viewer.route.finder.target.empty":"No matching reachable destinations","viewer.route.finder.target.results":"Reachable route destinations","viewer.route.finder.target.noun":"reachable destinations","viewer.route.hop.one":"{count} hop","viewer.route.hop.other":"{count} hops","viewer.lens.eyebrow":"Semantic lens","viewer.lens.title":"Compare system roles","viewer.lens.close":"Close semantic lens","viewer.lens.instruction":"Choose up to two semantic kinds. One reveals its real traffic; two compare only direct authored relationships.","viewer.lens.kinds":"Semantic kinds","viewer.lens.choose":"Choose a kind to inspect its nodes and touching relationships.","viewer.lens.copy":"Copy link to semantic lens","viewer.lens.clear":"Clear semantic lens","viewer.lens.open":"Open semantic lens","viewer.lens.openActive":"Open active semantic lens","viewer.lens.legend":"Semantic legend","viewer.lens.legend.inspect.one":"Inspect {label}, {count} node","viewer.lens.legend.inspect.other":"Inspect {label}, {count} nodes","viewer.lens.kind.count.one":"{label}, {count} node","viewer.lens.kind.count.other":"{label}, {count} nodes","viewer.lens.compare.one":"{first} → {second}: {forward} · {second} → {first}: {reverse} · {count} direct relationship","viewer.lens.compare.other":"{first} → {second}: {forward} · {second} → {first}: {reverse} · {count} direct relationships","viewer.lens.single":"{nodes} · {relationships} · connected peers remain visible","viewer.lens.node.one":"{count} {label} node","viewer.lens.node.other":"{count} {label} nodes","viewer.lens.relationship.one":"{count} touching relationship","viewer.lens.relationship.other":"{count} touching relationships","viewer.radar.title":"Semantic radar","viewer.radar.building":"Building overview","viewer.radar.openFull":"Open full semantic radar","viewer.radar.open":"Open radar","viewer.radar.close":"Close semantic radar","viewer.radar.surface":"Diagram overview. Click a node to focus it, or use arrow keys to pan.","viewer.radar.click":"Click node","viewer.radar.drag":"Drag to pan","viewer.radar.space":"Semantic radar needs more MAP space.","viewer.radar.nodes":"Semantic diagram radar nodes","viewer.radar.focus":"Focus {label} from Semantic Radar","viewer.radar.status":"{count} nodes · {viewport}","viewer.radar.fullMap":"{count} nodes · full map","viewer.radar.compacted":"Radar compacted to avoid covering the Semantic Passport or MAP controls.","viewer.radar.cancelWaiting":"Cancel semantic radar waiting for more MAP space","viewer.radar.needsSpace":"Semantic radar needs more visible MAP space","viewer.radar.viewport.full":"full map","viewer.radar.viewport.width":"{percent}% width","viewer.radar.viewport.scale":"{percent}% viewport","viewer.nav.controls":"Diagram view controls","viewer.nav.route":"Trace a directed route","viewer.nav.route.title":"Trace route (R)","viewer.nav.route.short":"PATH","viewer.nav.radar":"Open semantic radar","viewer.nav.radar.title":"Semantic radar (M)","viewer.nav.radar.short":"MAP","viewer.nav.lens":"Open semantic lens","viewer.nav.lens.title":"Semantic lens (L)","viewer.nav.lens.short":"LENS","viewer.nav.find":"Find a node","viewer.nav.find.title":"Find a node (/)","viewer.nav.guide":"Open diagram guide","viewer.nav.guide.title":"Diagram guide (?)","viewer.nav.zoomOut":"Zoom out","viewer.nav.zoomOut.title":"Zoom out (-)","viewer.nav.reset":"Reset diagram view","viewer.nav.reset.title":"Reset view (0)","viewer.nav.read":"READ","viewer.nav.zoomIn":"Zoom in","viewer.nav.zoomIn.title":"Zoom in (+)","viewer.nav.camera":"{hint}. Reset diagram view","viewer.nav.camera.title":"{semantic}{hint} · reset view (0)","viewer.nav.camera.semantic":"Semantic camera active · ","viewer.nav.level.map":"MAP","viewer.nav.level.read":"READ","viewer.nav.level.full":"FULL","viewer.nav.level.auto":"AUTO","viewer.nav.detail.map":"Zoom in to reveal relationship labels and node context","viewer.nav.detail.read":"Zoom in again to reveal tags and annotations","viewer.nav.detail.full":"Full diagram detail","viewer.intent.summary":"{label}. {out} outgoing, {in} incoming{loops}. {total} connections. Press Enter for details.","viewer.intent.loops":", {count} self loop","viewer.common.copied":"Copied","viewer.common.copyFailed":"Copy failed","viewer.common.copyLink":"Copy link","viewer.common.clear":"Clear","viewer.common.close":"Close"}}</script>
     <div class="guided-views no-print" id="guided-views" hidden aria-label="Guided diagram views">
@@ -5130,7 +5130,7 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
     <!-- Main Diagram -->
     <div class="diagram-container" data-detail-level="read"
          data-preset-badge-editorial-plate="ARCHIFY / PLATE 04">
-      <svg viewBox="0 0 1200 800" role="img" lang="en" aria-labelledby="archify-diagram-title archify-diagram-description" data-preset="classic" data-quality-profile="standard">
+      <svg viewBox="0 0 1200 750" role="img" lang="en" aria-labelledby="archify-diagram-title archify-diagram-description" data-preset="classic" data-quality-profile="standard">
         <title id="archify-diagram-title">Arquitetura Real Não-Linear — Aluno Presente / Equipe Presente</title>
         <desc id="archify-diagram-description">An architecture diagram generated by Archify.</desc>
         <!-- Definitions -->
@@ -5156,398 +5156,359 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
         <rect width="100%" height="100%" fill="url(#grid)" />
 
         <!-- Boundaries (behind everything) -->
-        <rect data-graph-role="structural-frame" data-composition-frame-kind="security-group" data-composition-frame-id="0" data-composition-frame-label="1 Kit = 6 Câmeras IA (1-2 Kits/Escola)" x="10" y="35" width="220" height="260" rx="8" class="c-security-group" stroke-width="1"/>
+        <rect data-graph-role="structural-frame" data-composition-frame-kind="security-group" data-composition-frame-id="0" data-composition-frame-label="Frontends Angular 19" x="10" y="350" width="220" height="260" rx="8" class="c-security-group" stroke-width="1"/>
 
-        <rect data-graph-role="structural-frame" data-composition-frame-kind="security-group" data-composition-frame-id="1" data-composition-frame-label="Frontends Angular 19" x="10" y="410" width="220" height="270" rx="8" class="c-security-group" stroke-width="1"/>
+        <rect data-graph-role="structural-frame" data-composition-frame-kind="region" data-composition-frame-id="1" data-composition-frame-label="APIs Executáveis Spring Boot" x="290" y="90" width="230" height="465" rx="12" class="c-region" stroke-width="1"/>
 
-        <rect data-graph-role="structural-frame" data-composition-frame-kind="region" data-composition-frame-id="2" data-composition-frame-label="APIs Executáveis Spring Boot" x="310" y="130" width="230" height="475" rx="12" class="c-region" stroke-width="1"/>
+        <rect data-graph-role="structural-frame" data-composition-frame-kind="region" data-composition-frame-id="2" data-composition-frame-label="JARs de Domínio (Classpath Embutido)" x="560" y="40" width="240" height="630" rx="12" class="c-region" stroke-width="1"/>
 
-        <rect data-graph-role="structural-frame" data-composition-frame-kind="region" data-composition-frame-id="3" data-composition-frame-label="JARs de Domínio (Classpath Embutido)" x="570" y="70" width="240" height="660" rx="12" class="c-region" stroke-width="1"/>
-
-        <rect data-graph-role="structural-frame" data-composition-frame-kind="security-group" data-composition-frame-id="4" data-composition-frame-label="Broker, Cache &amp; Schemas PostgreSQL" x="850" y="130" width="240" height="590" rx="8" class="c-security-group" stroke-width="1"/>
+        <rect data-graph-role="structural-frame" data-composition-frame-kind="security-group" data-composition-frame-id="3" data-composition-frame-label="Broker, Cache &amp; Schemas PostgreSQL" x="850" y="40" width="240" height="610" rx="8" class="c-security-group" stroke-width="1"/>
 
         <!-- Connection paths (before components for correct z-order) -->
-        <path data-edge-from="cameras-entrada" data-edge-to="base-api" data-edge-label="Entrada (TCP)" data-edge-key="0" data-edge-id="cam-ent-to-baseapi" data-composition-points="200,90;270,90;270,192.5;340,192.5" d="M 200 90 L 262 90 Q 270 90 270 98 L 270 184.5 Q 270 192.5 278 192.5 L 340 192.5" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
-        <path data-edge-from="cameras-saida" data-edge-to="base-api" data-edge-label="Saída (TCP)" data-edge-key="1" data-edge-id="cam-sai-to-baseapi" data-composition-points="200,170;270,170;270,192.5;340,192.5" d="M 200 170 L 262 170 Q 270 170 270 178 L 270 184.5 Q 270 192.5 278 192.5 L 340 192.5" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
-        <path data-edge-from="cameras-refeitorio" data-edge-to="base-api" data-edge-label="Refeitório (TCP)" data-edge-key="2" data-edge-id="cam-ref-to-baseapi" data-composition-points="200,250;270,250;270,192.5;340,192.5" d="M 200 250 L 262 250 Q 270 250 270 242 L 270 200.5 Q 270 192.5 278 192.5 L 340 192.5" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
-        <path data-edge-from="baseweb" data-edge-to="base-api" data-edge-label="REST &amp; WSS Stream" data-edge-key="3" data-edge-id="bw-to-baseapi" data-composition-points="200,470;270,470;270,192.5;340,192.5" d="M 200 470 L 262 470 Q 270 470 270 462 L 270 200.5 Q 270 192.5 278 192.5 L 340 192.5" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
-        <path data-edge-from="educacaoweb" data-edge-to="educacao-api" data-edge-label="REST JSON" data-edge-key="4" data-edge-id="ew-to-educapi" data-composition-points="200,630;270,630;270,552.5;340,552.5" d="M 200 630 L 262 630 Q 270 630 270 622 L 270 560.5 Q 270 552.5 278 552.5 L 340 552.5" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
-        <path data-edge-from="educacao-api" data-edge-to="base-api" data-edge-label="REST Sync (Fotos/Faces)" data-edge-key="5" data-edge-id="educapi-to-baseapi" data-composition-points="425,520;425,225" d="M 425 520 L 425 225" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
-        <path data-edge-from="base-api" data-edge-to="rabbitmq" data-edge-label="1. Publica Bruto" data-edge-key="6" data-edge-id="baseapi-to-rmq" data-composition-points="510,199.5;534,199.5;534,215.5;856,215.5;856,198;880,198" d="M 510 199.5 L 526 199.5 Q 534 199.5 534 207.5 L 534 207.5 Q 534 215.5 542 215.5 L 848 215.5 Q 856 215.5 856 207.5 L 856 206 Q 856 198 864 198 L 880 198" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
-        <path data-edge-from="rabbitmq" data-edge-to="base-service" data-edge-label="2. Consome Bruto 01" data-edge-key="7" data-edge-id="rmq-to-basesvc" data-composition-points="880,187;830,187;830,123.66666666666667;780,123.66666666666667" d="M 880 187 L 838 187 Q 830 187 830 179 L 830 131.66666666666669 Q 830 123.66666666666667 822 123.66666666666667 L 780 123.66666666666667" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
-        <path data-edge-from="base-service" data-edge-to="redis" data-edge-label="3. Deduplica 5 min" data-edge-key="8" data-edge-id="basesvc-to-redis" data-composition-points="780,131.33333333333334;830,131.33333333333334;830,337.5;880,337.5" d="M 780 131.33333333333334 L 822 131.33333333333334 Q 830 131.33333333333334 830 139.33333333333334 L 830 329.5 Q 830 337.5 838 337.5 L 880 337.5" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
-        <path data-edge-from="base-service" data-edge-to="rabbitmq" data-edge-label="4. Publica Tratado" data-edge-key="9" data-edge-id="basesvc-to-rmq" data-composition-points="780,116;830,116;830,176;880,176" d="M 780 116 L 822 116 Q 830 116 830 124 L 830 168 Q 830 176 838 176 L 880 176" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
-        <path data-edge-from="rabbitmq" data-edge-to="alunopresente-service" data-edge-label="5. Consome Tratado 02" data-edge-key="10" data-edge-id="rmq-to-alunosvc" data-composition-points="880,209;830,209;830,543;780,543" d="M 880 209 L 838 209 Q 830 209 830 217 L 830 535 Q 830 543 822 543 L 780 543" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
-        <path data-edge-from="alunopresente-service" data-edge-to="firebase" data-edge-label="6. Dispara Push Pais" data-edge-key="11" data-edge-id="alunosvc-to-fcm" data-composition-points="780,557;830,557;830,675;880,675" d="M 780 557 L 822 557 Q 830 557 830 565 L 830 667 Q 830 675 838 675 L 880 675" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
-        <path data-edge-from="base-service" data-edge-to="postgres" data-edge-label="Grava base.evento" data-edge-key="12" data-edge-id="basesvc-to-pg" data-composition-points="780,139;830,139;830,515.5;880,515.5" d="M 780 139 L 822 139 Q 830 139 830 147 L 830 507.5 Q 830 515.5 838 515.5 L 880 515.5" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
-        <path data-edge-from="integracao-sql" data-edge-to="postgres" data-edge-label="Views base ⇄ aluno" data-edge-key="13" data-edge-id="integracao-to-pg" data-composition-points="780,435;830,435;830,529.5;880,529.5" d="M 780 435 L 822 435 Q 830 435 830 443 L 830 521.5 Q 830 529.5 838 529.5 L 880 529.5" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
-        <path data-edge-from="alunopresente-service" data-edge-to="postgres" data-edge-label="Presenças &amp; Consultas" data-edge-key="14" data-edge-id="alunosvc-to-pg" data-composition-points="780,550;830,550;830,522.5;880,522.5" d="M 780 550 L 822 550 Q 830 550 830 542 L 830 530.5 Q 830 522.5 838 522.5 L 880 522.5" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
-        <path data-edge-from="base-api" data-edge-to="base-service" data-edge-label="Classpath" data-edge-key="15" data-edge-id="baseapi-embed-basesvc" data-composition-points="510,185.5;555,185.5;555,127.5;600,127.5" d="M 510 185.5 L 547 185.5 Q 555 185.5 555 177.5 L 555 135.5 Q 555 127.5 563 127.5 L 600 127.5" class="a-dashed" stroke-width="1.5" marker-end="url(#arrowhead-dashed)"/>
-        <path data-edge-from="educacao-api" data-edge-to="alunopresente-service" data-edge-label="Classpath" data-edge-key="16" data-edge-id="educapi-embed-alunosvc" data-composition-points="510,552.5;600,552.5" d="M 510 552.5 L 600 552.5" class="a-dashed" stroke-width="1.5" marker-end="url(#arrowhead-dashed)"/>
-        <path data-edge-from="alunopresente-service" data-edge-to="commons-lib" data-edge-label="AppBaseEntity" data-edge-key="17" data-edge-id="alunosvc-to-commons" data-composition-points="690,580;690,660" d="M 690 580 L 690 660" class="a-dashed" stroke-width="1.5" marker-end="url(#arrowhead-dashed)"/>
-        <path data-edge-from="base-service" data-edge-to="cameras-entrada" data-edge-label="Sync FDLib (Faces)" data-edge-key="18" data-edge-id="sync-faces-cam" data-composition-points="690,100;690,41;120,41;120,65" d="M 690 100 L 690 49 Q 690 41 682 41 L 128 41 Q 120 41 120 49 L 120 65" class="a-dashed" stroke-width="1.5" marker-end="url(#arrowhead-dashed)"/>
+        <path data-edge-from="cameras-kit" data-edge-to="base-api" data-edge-label="Alarme Facial (TCP :50000)" data-edge-key="0" data-edge-id="cam-to-baseapi" data-composition-points="210,152.5;320,152.5" d="M 210 152.5 L 320 152.5" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+        <path data-edge-from="baseweb" data-edge-to="base-api" data-edge-label="REST &amp; WSS Stream" data-edge-key="1" data-edge-id="bw-to-baseapi" data-composition-points="200,410;260,410;260,152.5;320,152.5" d="M 200 410 L 252 410 Q 260 410 260 402 L 260 160.5 Q 260 152.5 268 152.5 L 320 152.5" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+        <path data-edge-from="educacaoweb" data-edge-to="educacao-api" data-edge-label="REST JSON" data-edge-key="2" data-edge-id="ew-to-educapi" data-composition-points="200,560;260,560;260,502.5;320,502.5" d="M 200 560 L 252 560 Q 260 560 260 552 L 260 510.5 Q 260 502.5 268 502.5 L 320 502.5" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+        <path data-edge-from="educacao-api" data-edge-to="base-api" data-edge-label="REST Sync (Fotos/Faces)" data-edge-key="3" data-edge-id="educapi-to-baseapi" data-composition-points="405,470;405,185" d="M 405 470 L 405 185" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+        <path data-edge-from="base-api" data-edge-to="rabbitmq" data-edge-label="1. Publica Bruto" data-edge-key="4" data-edge-id="baseapi-to-rmq" data-composition-points="490,152.5;856,152.5;856,102.5;880,102.5" d="M 490 152.5 L 848 152.5 Q 856 152.5 856 144.5 L 856 110.5 Q 856 102.5 864 102.5 L 880 102.5" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+        <path data-edge-from="rabbitmq" data-edge-to="base-service" data-edge-label="2. Consome Bruto" data-edge-key="5" data-edge-id="rmq-to-basesvc" data-composition-points="880,102.5;856,102.5;856,118.5;794,118.5;794,97.5;770,97.5" d="M 880 102.5 L 864 102.5 Q 856 102.5 856 110.5 L 856 110.5 Q 856 118.5 848 118.5 L 802 118.5 Q 794 118.5 794 110.5 L 794 105.5 Q 794 97.5 786 97.5 L 770 97.5" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        <path data-edge-from="base-service" data-edge-to="redis" data-edge-label="3. Deduplica 5 min" data-edge-key="6" data-edge-id="basesvc-to-redis" data-composition-points="770,90.5;825,90.5;825,257.5;880,257.5" d="M 770 90.5 L 817 90.5 Q 825 90.5 825 98.5 L 825 249.5 Q 825 257.5 833 257.5 L 880 257.5" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        <path data-edge-from="base-service" data-edge-to="rabbitmq" data-edge-label="4. Publica Tratado" data-edge-key="7" data-edge-id="basesvc-to-rmq" data-composition-points="770,97.5;794,97.5;794,118.5;856,118.5;856,102.5;880,102.5" d="M 770 97.5 L 786 97.5 Q 794 97.5 794 105.5 L 794 110.5 Q 794 118.5 802 118.5 L 848 118.5 Q 856 118.5 856 110.5 L 856 110.5 Q 856 102.5 864 102.5 L 880 102.5" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        <path data-edge-from="rabbitmq" data-edge-to="alunopresente-service" data-edge-label="5. Consome Tratado" data-edge-key="8" data-edge-id="rmq-to-alunosvc" data-composition-points="880,102.5;825,102.5;825,486;770,486" d="M 880 102.5 L 833 102.5 Q 825 102.5 825 110.5 L 825 478 Q 825 486 817 486 L 770 486" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+        <path data-edge-from="alunopresente-service" data-edge-to="firebase" data-edge-label="6. Push Pais" data-edge-key="9" data-edge-id="alunosvc-to-fcm" data-composition-points="770,514;825,514;825,605;880,605" d="M 770 514 L 817 514 Q 825 514 825 522 L 825 597 Q 825 605 833 605 L 880 605" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        <path data-edge-from="base-service" data-edge-to="postgres" data-edge-label="Grava base.evento" data-edge-key="10" data-edge-id="basesvc-to-pg" data-composition-points="770,104.5;825,104.5;825,438.5;880,438.5" d="M 770 104.5 L 817 104.5 Q 825 104.5 825 112.5 L 825 430.5 Q 825 438.5 833 438.5 L 880 438.5" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        <path data-edge-from="integracao-sql" data-edge-to="postgres" data-edge-label="Views base ⇄ aluno" data-edge-key="11" data-edge-id="integracao-to-pg" data-composition-points="770,395;825,395;825,452.5;880,452.5" d="M 770 395 L 817 395 Q 825 395 825 403 L 825 444.5 Q 825 452.5 833 452.5 L 880 452.5" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+        <path data-edge-from="alunopresente-service" data-edge-to="postgres" data-edge-label="Presenças &amp; Consultas" data-edge-key="12" data-edge-id="alunosvc-to-pg" data-composition-points="770,500;825,500;825,466.5;880,466.5" d="M 770 500 L 817 500 Q 825 500 825 492 L 825 474.5 Q 825 466.5 833 466.5 L 880 466.5" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+        <path data-edge-from="base-api" data-edge-to="base-service" data-edge-label="Classpath" data-edge-key="13" data-edge-id="baseapi-embed-basesvc" data-composition-points="490,152.5;540,152.5;540,97.5;590,97.5" d="M 490 152.5 L 532 152.5 Q 540 152.5 540 144.5 L 540 105.5 Q 540 97.5 548 97.5 L 590 97.5" class="a-dashed" stroke-width="1.5" marker-end="url(#arrowhead-dashed)"/>
+        <path data-edge-from="educacao-api" data-edge-to="alunopresente-service" data-edge-label="Classpath" data-edge-key="14" data-edge-id="educapi-embed-alunosvc" data-composition-points="490,502.5;590,502.5" d="M 490 502.5 L 590 502.5" class="a-dashed" stroke-width="1.5" marker-end="url(#arrowhead-dashed)"/>
+        <path data-edge-from="alunopresente-service" data-edge-to="commons-lib" data-edge-label="AppBaseEntity" data-edge-key="15" data-edge-id="alunosvc-to-commons" data-composition-points="680,530;680,600" d="M 680 530 L 680 600" class="a-dashed" stroke-width="1.5" marker-end="url(#arrowhead-dashed)"/>
+        <path data-edge-from="base-service" data-edge-to="cameras-kit" data-edge-label="Sync FDLib (Faces)" data-edge-key="16" data-edge-id="sync-faces-cam" data-composition-points="680,70;680,46;125,46;125,120" d="M 680 70 L 680 54 Q 680 46 672 46 L 133 46 Q 125 46 125 54 L 125 120" class="a-dashed" stroke-width="1.5" marker-end="url(#arrowhead-dashed)"/>
 
         <!-- Components -->
-        <g id="node-cameras-entrada" data-node-id="cameras-entrada" data-node-label="2x Câmeras Entrada" tabindex="0" role="button" aria-label="Focus 2x Câmeras Entrada, Hikvision / Dahua (Edge AI), 1 Kit = 6 Câmeras IA (1-2 Kits/Escola)" aria-pressed="false" data-node-kind="backend" data-node-sublabel="Hikvision / Dahua (Edge AI)" data-node-context="1 Kit = 6 Câmeras IA (1-2 Kits/Escola)">
-          <title>2x Câmeras Entrada · Hikvision / Dahua (Edge AI) · 1 Kit = 6 Câmeras IA (1-2 Kits/Escola)</title>
-          <rect x="40" y="65" width="160" height="50" rx="6" class="c-mask"/>
-          <rect x="40" y="65" width="160" height="50" rx="6" class="c-backend" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="backend" class="semantic-sigil s-backend" transform="translate(46 71) scale(0.6875)">
+        <g id="node-cameras-kit" data-node-id="cameras-kit" data-node-label="Kit Câmeras IA" tabindex="0" role="button" aria-label="Focus Kit Câmeras IA, 1 Kit = 6 cam (Hikv/Dahua), Architecture component" aria-pressed="false" data-node-kind="backend" data-node-sublabel="1 Kit = 6 cam (Hikv/Dahua)" data-node-context="Architecture component">
+          <title>Kit Câmeras IA · 1 Kit = 6 cam (Hikv/Dahua) · Architecture component</title>
+          <rect x="40" y="120" width="170" height="65" rx="6" class="c-mask"/>
+          <rect x="40" y="120" width="170" height="65" rx="6" class="c-backend" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="backend" class="semantic-sigil s-backend" transform="translate(46 126) scale(0.6875)">
             <path d="M6 3 3 8l3 5M10 3l3 5-3 5"/>
           </g>
-          <text data-node-label="" data-detail-anchor="" x="120" y="88" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">2x Câmeras Entrada</text>
-        <text data-detail="context" x="120" y="104" class="t-muted" font-size="9" text-anchor="middle">Hikvision / Dahua (Edge AI)</text>
-        </g>
-
-        <g id="node-cameras-saida" data-node-id="cameras-saida" data-node-label="2x Câmeras Saída" tabindex="0" role="button" aria-label="Focus 2x Câmeras Saída, Hikvision / Dahua (Edge AI), 1 Kit = 6 Câmeras IA (1-2 Kits/Escola)" aria-pressed="false" data-node-kind="backend" data-node-sublabel="Hikvision / Dahua (Edge AI)" data-node-context="1 Kit = 6 Câmeras IA (1-2 Kits/Escola)">
-          <title>2x Câmeras Saída · Hikvision / Dahua (Edge AI) · 1 Kit = 6 Câmeras IA (1-2 Kits/Escola)</title>
-          <rect x="40" y="145" width="160" height="50" rx="6" class="c-mask"/>
-          <rect x="40" y="145" width="160" height="50" rx="6" class="c-backend" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="backend" class="semantic-sigil s-backend" transform="translate(46 151) scale(0.6875)">
-            <path d="M6 3 3 8l3 5M10 3l3 5-3 5"/>
-          </g>
-          <text data-node-label="" data-detail-anchor="" x="120" y="168" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">2x Câmeras Saída</text>
-        <text data-detail="context" x="120" y="184" class="t-muted" font-size="9" text-anchor="middle">Hikvision / Dahua (Edge AI)</text>
-        </g>
-
-        <g id="node-cameras-refeitorio" data-node-id="cameras-refeitorio" data-node-label="2x Câmeras Refeitório" tabindex="0" role="button" aria-label="Focus 2x Câmeras Refeitório, Hikvision / Dahua (Edge AI), 1 Kit = 6 Câmeras IA (1-2 Kits/Escola)" aria-pressed="false" data-node-kind="backend" data-node-sublabel="Hikvision / Dahua (Edge AI)" data-node-context="1 Kit = 6 Câmeras IA (1-2 Kits/Escola)">
-          <title>2x Câmeras Refeitório · Hikvision / Dahua (Edge AI) · 1 Kit = 6 Câmeras IA (1-2 Kits/Escola)</title>
-          <rect x="40" y="225" width="160" height="50" rx="6" class="c-mask"/>
-          <rect x="40" y="225" width="160" height="50" rx="6" class="c-backend" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="backend" class="semantic-sigil s-backend" transform="translate(46 231) scale(0.6875)">
-            <path d="M6 3 3 8l3 5M10 3l3 5-3 5"/>
-          </g>
-          <text data-node-label="" data-detail-anchor="" x="120" y="248" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">2x Câmeras Refeitório</text>
-        <text data-detail="context" x="120" y="264" class="t-muted" font-size="9" text-anchor="middle">Hikvision / Dahua (Edge AI)</text>
+          <text data-node-label="" data-detail-anchor="" x="125" y="150.5" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Kit Câmeras IA</text>
+        <text data-detail="context" x="125" y="166.5" class="t-muted" font-size="9" text-anchor="middle">1 Kit = 6 cam (Hikv/Dahua)</text>
         </g>
 
         <g id="node-baseweb" data-node-id="baseweb" data-node-label="baseweb (4200)" tabindex="0" role="button" aria-label="Focus baseweb (4200), Admin, Câmeras &amp; Hardware, Frontends Angular 19, Angular" aria-pressed="false" data-node-kind="frontend" data-node-sublabel="Admin, Câmeras &amp; Hardware" data-node-context="Frontends Angular 19" data-node-brand="Angular" data-node-brand-id="angular" data-node-brand-status="preset" data-node-brand-source="https://angular.dev/press-kit">
           <title>baseweb (4200) · Admin, Câmeras &amp; Hardware · Frontends Angular 19 · Angular</title>
-          <rect x="40" y="440" width="160" height="60" rx="6" class="c-mask"/>
-          <rect x="40" y="440" width="160" height="60" rx="6" class="c-frontend" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="frontend" class="semantic-sigil s-frontend" transform="translate(46 446) scale(0.6875)">
+          <rect x="40" y="380" width="160" height="60" rx="6" class="c-mask"/>
+          <rect x="40" y="380" width="160" height="60" rx="6" class="c-frontend" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="frontend" class="semantic-sigil s-frontend" transform="translate(46 386) scale(0.6875)">
             <rect x="2" y="3" width="12" height="10" rx="2"/>
             <path d="M2 6.5h12"/>
             <circle cx="4.1" cy="4.8" r=".7" class="sigil-fill"/>
             <circle cx="6.3" cy="4.8" r=".7" class="sigil-fill"/>
           </g>
-          <g aria-hidden="true" data-brand-mark="angular" data-brand-title="Angular" data-brand-status="preset" data-brand-source="https://angular.dev/press-kit" class="brand-mark" transform="translate(178 446)">
+          <g aria-hidden="true" data-brand-mark="angular" data-brand-title="Angular" data-brand-status="preset" data-brand-source="https://angular.dev/press-kit" class="brand-mark" transform="translate(178 386)">
             <rect width="16" height="16" rx="4" class="brand-mark-badge"/>
             <path d="M16.712 17.711H7.288l-1.204 2.916L12 24l5.916-3.373-1.204-2.916ZM14.692 0l7.832 16.855.814-12.856L14.692 0ZM9.308 0 .662 3.999l.814 12.856L9.308 0Zm-.405 13.93h6.198L12 6.396 8.903 13.93Z" transform="translate(3 3) scale(0.4166666666666667)" fill="#0F0F11"/>
             <rect width="16" height="16" rx="4" class="brand-mark-frame"/>
           </g>
-          <text data-node-label="" data-detail-anchor="" x="120" y="468" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">baseweb (4200)</text>
-        <text data-detail="context" x="120" y="484" class="t-muted" font-size="9" text-anchor="middle">Admin, Câmeras &amp; Hardware</text>
+          <text data-node-label="" data-detail-anchor="" x="120" y="408" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">baseweb (4200)</text>
+        <text data-detail="context" x="120" y="424" class="t-muted" font-size="9" text-anchor="middle">Admin, Câmeras &amp; Hardware</text>
         </g>
 
         <g id="node-educacaoweb" data-node-id="educacaoweb" data-node-label="educacaoweb (4201)" tabindex="0" role="button" aria-label="Focus educacaoweb (4201), Gestão Escolar &amp; Busca Ativa, Frontends Angular 19, Angular" aria-pressed="false" data-node-kind="frontend" data-node-sublabel="Gestão Escolar &amp; Busca Ativa" data-node-context="Frontends Angular 19" data-node-brand="Angular" data-node-brand-id="angular" data-node-brand-status="preset" data-node-brand-source="https://angular.dev/press-kit">
           <title>educacaoweb (4201) · Gestão Escolar &amp; Busca Ativa · Frontends Angular 19 · Angular</title>
-          <rect x="40" y="600" width="160" height="60" rx="6" class="c-mask"/>
-          <rect x="40" y="600" width="160" height="60" rx="6" class="c-frontend" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="frontend" class="semantic-sigil s-frontend" transform="translate(46 606) scale(0.6875)">
+          <rect x="40" y="530" width="160" height="60" rx="6" class="c-mask"/>
+          <rect x="40" y="530" width="160" height="60" rx="6" class="c-frontend" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="frontend" class="semantic-sigil s-frontend" transform="translate(46 536) scale(0.6875)">
             <rect x="2" y="3" width="12" height="10" rx="2"/>
             <path d="M2 6.5h12"/>
             <circle cx="4.1" cy="4.8" r=".7" class="sigil-fill"/>
             <circle cx="6.3" cy="4.8" r=".7" class="sigil-fill"/>
           </g>
-          <g aria-hidden="true" data-brand-mark="angular" data-brand-title="Angular" data-brand-status="preset" data-brand-source="https://angular.dev/press-kit" class="brand-mark" transform="translate(178 606)">
+          <g aria-hidden="true" data-brand-mark="angular" data-brand-title="Angular" data-brand-status="preset" data-brand-source="https://angular.dev/press-kit" class="brand-mark" transform="translate(178 536)">
             <rect width="16" height="16" rx="4" class="brand-mark-badge"/>
             <path d="M16.712 17.711H7.288l-1.204 2.916L12 24l5.916-3.373-1.204-2.916ZM14.692 0l7.832 16.855.814-12.856L14.692 0ZM9.308 0 .662 3.999l.814 12.856L9.308 0Zm-.405 13.93h6.198L12 6.396 8.903 13.93Z" transform="translate(3 3) scale(0.4166666666666667)" fill="#0F0F11"/>
             <rect width="16" height="16" rx="4" class="brand-mark-frame"/>
           </g>
-          <text data-node-label="" data-detail-anchor="" x="120" y="628" class="t-primary" font-size="9.6" font-weight="600" text-anchor="middle">educacaoweb (4201)</text>
-        <text data-detail="context" x="120" y="644" class="t-muted" font-size="9" text-anchor="middle">Gestão Escolar &amp; Busca Ativa</text>
+          <text data-node-label="" data-detail-anchor="" x="120" y="558" class="t-primary" font-size="9.6" font-weight="600" text-anchor="middle">educacaoweb (4201)</text>
+        <text data-detail="context" x="120" y="574" class="t-muted" font-size="9" text-anchor="middle">Gestão Escolar &amp; Busca Ativa</text>
         </g>
 
         <g id="node-base-api" data-node-id="base-api" data-node-label="base-api (8025)" tabindex="0" role="button" aria-label="Focus base-api (8025), Netty TCP :50000 &amp; WSS Stream, APIs Executáveis Spring Boot, Spring" aria-pressed="false" data-node-kind="backend" data-node-sublabel="Netty TCP :50000 &amp; WSS Stream" data-node-context="APIs Executáveis Spring Boot" data-node-brand="Spring" data-node-brand-id="spring" data-node-brand-status="preset" data-node-brand-source="https://spring.io/trademarks">
           <title>base-api (8025) · Netty TCP :50000 &amp; WSS Stream · APIs Executáveis Spring Boot · Spring</title>
-          <rect x="340" y="160" width="170" height="65" rx="6" class="c-mask"/>
-          <rect x="340" y="160" width="170" height="65" rx="6" class="c-backend" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="backend" class="semantic-sigil s-backend" transform="translate(346 166) scale(0.6875)">
+          <rect x="320" y="120" width="170" height="65" rx="6" class="c-mask"/>
+          <rect x="320" y="120" width="170" height="65" rx="6" class="c-backend" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="backend" class="semantic-sigil s-backend" transform="translate(326 126) scale(0.6875)">
             <path d="M6 3 3 8l3 5M10 3l3 5-3 5"/>
           </g>
-          <g aria-hidden="true" data-brand-mark="spring" data-brand-title="Spring" data-brand-status="preset" data-brand-source="https://spring.io/trademarks" class="brand-mark" transform="translate(488 166)">
+          <g aria-hidden="true" data-brand-mark="spring" data-brand-title="Spring" data-brand-status="preset" data-brand-source="https://spring.io/trademarks" class="brand-mark" transform="translate(468 126)">
             <rect width="16" height="16" rx="4" class="brand-mark-badge"/>
             <path d="M21.8537 1.4158a10.4504 10.4504 0 0 1-1.284 2.2471A11.9666 11.9666 0 1 0 3.8518 20.7757l.4445.3951a11.9543 11.9543 0 0 0 19.6316-8.2971c.3457-3.0126-.568-6.8649-2.0743-11.458zM5.5805 20.8745a1.0174 1.0174 0 1 1-.1482-1.4323 1.0396 1.0396 0 0 1 .1482 1.4323zm16.1991-3.5806c-2.9385 3.9263-9.2601 2.5928-13.2852 2.7904 0 0-.7161.0494-1.4323.1481 0 0 .2717-.1234.6174-.2469 2.8398-.9877 4.1732-1.1853 5.9018-2.0743 3.2349-1.6545 6.4698-5.2844 7.1118-9.0379-1.2347 3.6053-4.9881 6.7167-8.3959 7.9761-2.3459.8643-6.5685 1.7039-6.5685 1.7039l-.1729-.0988c-2.8645-1.4076-2.9632-7.6304 2.2718-9.6306 2.2966-.889 4.4696-.395 6.9637-.9877 2.6422-.6174 5.7043-2.5929 6.939-5.1857 1.3828 4.1732 3.062 10.643.0493 14.6434z" transform="translate(3 3) scale(0.4166666666666667)" fill="#6DB33F"/>
             <rect width="16" height="16" rx="4" class="brand-mark-frame"/>
           </g>
-          <text data-node-label="" data-detail-anchor="" x="425" y="190.5" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">base-api (8025)</text>
-        <text data-detail="context" x="425" y="206.5" class="t-muted" font-size="9" text-anchor="middle">Netty TCP :50000 &amp; WSS Stream</text>
+          <text data-node-label="" data-detail-anchor="" x="405" y="150.5" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">base-api (8025)</text>
+        <text data-detail="context" x="405" y="166.5" class="t-muted" font-size="9" text-anchor="middle">Netty TCP :50000 &amp; WSS Stream</text>
         </g>
 
         <g id="node-educacao-api" data-node-id="educacao-api" data-node-label="educacao-api (8021)" tabindex="0" role="button" aria-label="Focus educacao-api (8021), Core Educacional REST, APIs Executáveis Spring Boot, Spring" aria-pressed="false" data-node-kind="backend" data-node-sublabel="Core Educacional REST" data-node-context="APIs Executáveis Spring Boot" data-node-brand="Spring" data-node-brand-id="spring" data-node-brand-status="preset" data-node-brand-source="https://spring.io/trademarks">
           <title>educacao-api (8021) · Core Educacional REST · APIs Executáveis Spring Boot · Spring</title>
-          <rect x="340" y="520" width="170" height="65" rx="6" class="c-mask"/>
-          <rect x="340" y="520" width="170" height="65" rx="6" class="c-backend" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="backend" class="semantic-sigil s-backend" transform="translate(346 526) scale(0.6875)">
+          <rect x="320" y="470" width="170" height="65" rx="6" class="c-mask"/>
+          <rect x="320" y="470" width="170" height="65" rx="6" class="c-backend" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="backend" class="semantic-sigil s-backend" transform="translate(326 476) scale(0.6875)">
             <path d="M6 3 3 8l3 5M10 3l3 5-3 5"/>
           </g>
-          <g aria-hidden="true" data-brand-mark="spring" data-brand-title="Spring" data-brand-status="preset" data-brand-source="https://spring.io/trademarks" class="brand-mark" transform="translate(488 526)">
+          <g aria-hidden="true" data-brand-mark="spring" data-brand-title="Spring" data-brand-status="preset" data-brand-source="https://spring.io/trademarks" class="brand-mark" transform="translate(468 476)">
             <rect width="16" height="16" rx="4" class="brand-mark-badge"/>
             <path d="M21.8537 1.4158a10.4504 10.4504 0 0 1-1.284 2.2471A11.9666 11.9666 0 1 0 3.8518 20.7757l.4445.3951a11.9543 11.9543 0 0 0 19.6316-8.2971c.3457-3.0126-.568-6.8649-2.0743-11.458zM5.5805 20.8745a1.0174 1.0174 0 1 1-.1482-1.4323 1.0396 1.0396 0 0 1 .1482 1.4323zm16.1991-3.5806c-2.9385 3.9263-9.2601 2.5928-13.2852 2.7904 0 0-.7161.0494-1.4323.1481 0 0 .2717-.1234.6174-.2469 2.8398-.9877 4.1732-1.1853 5.9018-2.0743 3.2349-1.6545 6.4698-5.2844 7.1118-9.0379-1.2347 3.6053-4.9881 6.7167-8.3959 7.9761-2.3459.8643-6.5685 1.7039-6.5685 1.7039l-.1729-.0988c-2.8645-1.4076-2.9632-7.6304 2.2718-9.6306 2.2966-.889 4.4696-.395 6.9637-.9877 2.6422-.6174 5.7043-2.5929 6.939-5.1857 1.3828 4.1732 3.062 10.643.0493 14.6434z" transform="translate(3 3) scale(0.4166666666666667)" fill="#6DB33F"/>
             <rect width="16" height="16" rx="4" class="brand-mark-frame"/>
           </g>
-          <text data-node-label="" data-detail-anchor="" x="425" y="550.5" class="t-primary" font-size="10" font-weight="600" text-anchor="middle">educacao-api (8021)</text>
-        <text data-detail="context" x="425" y="566.5" class="t-muted" font-size="9" text-anchor="middle">Core Educacional REST</text>
+          <text data-node-label="" data-detail-anchor="" x="405" y="500.5" class="t-primary" font-size="10" font-weight="600" text-anchor="middle">educacao-api (8021)</text>
+        <text data-detail="context" x="405" y="516.5" class="t-muted" font-size="9" text-anchor="middle">Core Educacional REST</text>
         </g>
 
         <g id="node-base-service" data-node-id="base-service" data-node-label="base-service" tabindex="0" role="button" aria-label="Focus base-service, JAR: Drivers &amp; Eventos, JARs de Domínio (Classpath Embutido), Spring" aria-pressed="false" data-node-kind="backend" data-node-sublabel="JAR: Drivers &amp; Eventos" data-node-context="JARs de Domínio (Classpath Embutido)" data-node-brand="Spring" data-node-brand-id="spring" data-node-brand-status="preset" data-node-brand-source="https://spring.io/trademarks">
           <title>base-service · JAR: Drivers &amp; Eventos · JARs de Domínio (Classpath Embutido) · Spring</title>
-          <rect x="600" y="100" width="180" height="55" rx="6" class="c-mask"/>
-          <rect x="600" y="100" width="180" height="55" rx="6" class="c-backend" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="backend" class="semantic-sigil s-backend" transform="translate(606 106) scale(0.6875)">
+          <rect x="590" y="70" width="180" height="55" rx="6" class="c-mask"/>
+          <rect x="590" y="70" width="180" height="55" rx="6" class="c-backend" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="backend" class="semantic-sigil s-backend" transform="translate(596 76) scale(0.6875)">
             <path d="M6 3 3 8l3 5M10 3l3 5-3 5"/>
           </g>
-          <g aria-hidden="true" data-brand-mark="spring" data-brand-title="Spring" data-brand-status="preset" data-brand-source="https://spring.io/trademarks" class="brand-mark" transform="translate(758 106)">
+          <g aria-hidden="true" data-brand-mark="spring" data-brand-title="Spring" data-brand-status="preset" data-brand-source="https://spring.io/trademarks" class="brand-mark" transform="translate(748 76)">
             <rect width="16" height="16" rx="4" class="brand-mark-badge"/>
             <path d="M21.8537 1.4158a10.4504 10.4504 0 0 1-1.284 2.2471A11.9666 11.9666 0 1 0 3.8518 20.7757l.4445.3951a11.9543 11.9543 0 0 0 19.6316-8.2971c.3457-3.0126-.568-6.8649-2.0743-11.458zM5.5805 20.8745a1.0174 1.0174 0 1 1-.1482-1.4323 1.0396 1.0396 0 0 1 .1482 1.4323zm16.1991-3.5806c-2.9385 3.9263-9.2601 2.5928-13.2852 2.7904 0 0-.7161.0494-1.4323.1481 0 0 .2717-.1234.6174-.2469 2.8398-.9877 4.1732-1.1853 5.9018-2.0743 3.2349-1.6545 6.4698-5.2844 7.1118-9.0379-1.2347 3.6053-4.9881 6.7167-8.3959 7.9761-2.3459.8643-6.5685 1.7039-6.5685 1.7039l-.1729-.0988c-2.8645-1.4076-2.9632-7.6304 2.2718-9.6306 2.2966-.889 4.4696-.395 6.9637-.9877 2.6422-.6174 5.7043-2.5929 6.939-5.1857 1.3828 4.1732 3.062 10.643.0493 14.6434z" transform="translate(3 3) scale(0.4166666666666667)" fill="#6DB33F"/>
             <rect width="16" height="16" rx="4" class="brand-mark-frame"/>
           </g>
-          <text data-node-label="" data-detail-anchor="" x="690" y="125.5" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">base-service</text>
-        <text data-detail="context" x="690" y="141.5" class="t-muted" font-size="9" text-anchor="middle">JAR: Drivers &amp; Eventos</text>
+          <text data-node-label="" data-detail-anchor="" x="680" y="95.5" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">base-service</text>
+        <text data-detail="context" x="680" y="111.5" class="t-muted" font-size="9" text-anchor="middle">JAR: Drivers &amp; Eventos</text>
         </g>
 
         <g id="node-auth-storage-cad" data-node-id="auth-storage-cad" data-node-label="auth, storage &amp; cad" tabindex="0" role="button" aria-label="Focus auth, storage &amp; cad, JARs: Multi-Tenant &amp; Imagens, JARs de Domínio (Classpath Embutido)" aria-pressed="false" data-node-kind="security" data-node-sublabel="JARs: Multi-Tenant &amp; Imagens" data-node-context="JARs de Domínio (Classpath Embutido)">
           <title>auth, storage &amp; cad · JARs: Multi-Tenant &amp; Imagens · JARs de Domínio (Classpath Embutido)</title>
-          <rect x="600" y="290" width="180" height="55" rx="6" class="c-mask"/>
-          <rect x="600" y="290" width="180" height="55" rx="6" class="c-security" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="security" class="semantic-sigil s-security" transform="translate(606 296) scale(0.6875)">
+          <rect x="590" y="230" width="180" height="55" rx="6" class="c-mask"/>
+          <rect x="590" y="230" width="180" height="55" rx="6" class="c-security" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="security" class="semantic-sigil s-security" transform="translate(596 236) scale(0.6875)">
             <path d="M8 2.2 13 4v3.5c0 3.1-1.8 5.4-5 6.5-3.2-1.1-5-3.4-5-6.5V4Z"/>
             <path d="m5.8 8 1.5 1.5 3-3"/>
           </g>
-          <text data-node-label="" data-detail-anchor="" x="690" y="315.5" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">auth, storage &amp; cad</text>
-        <text data-detail="context" x="690" y="331.5" class="t-muted" font-size="9" text-anchor="middle">JARs: Multi-Tenant &amp; Imagens</text>
+          <text data-node-label="" data-detail-anchor="" x="680" y="255.5" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">auth, storage &amp; cad</text>
+        <text data-detail="context" x="680" y="271.5" class="t-muted" font-size="9" text-anchor="middle">JARs: Multi-Tenant &amp; Imagens</text>
         </g>
 
         <g id="node-integracao-sql" data-node-id="integracao-sql" data-node-label="integracao-sql" tabindex="0" role="button" aria-label="Focus integracao-sql, Views Cross-Schema (Flyway), JARs de Domínio (Classpath Embutido)" aria-pressed="false" data-node-kind="database" data-node-sublabel="Views Cross-Schema (Flyway)" data-node-context="JARs de Domínio (Classpath Embutido)">
           <title>integracao-sql · Views Cross-Schema (Flyway) · JARs de Domínio (Classpath Embutido)</title>
-          <rect x="600" y="410" width="180" height="50" rx="6" class="c-mask"/>
-          <rect x="600" y="410" width="180" height="50" rx="6" class="c-database" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="database" class="semantic-sigil s-database" transform="translate(606 416) scale(0.6875)">
+          <rect x="590" y="370" width="180" height="50" rx="6" class="c-mask"/>
+          <rect x="590" y="370" width="180" height="50" rx="6" class="c-database" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="database" class="semantic-sigil s-database" transform="translate(596 376) scale(0.6875)">
             <ellipse cx="8" cy="4" rx="5" ry="2"/>
             <path d="M3 4v8c0 1.1 2.2 2 5 2s5-.9 5-2V4M3 8c0 1.1 2.2 2 5 2s5-.9 5-2"/>
           </g>
-          <text data-node-label="" data-detail-anchor="" x="690" y="433" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">integracao-sql</text>
-        <text data-detail="context" x="690" y="449" class="t-muted" font-size="9" text-anchor="middle">Views Cross-Schema (Flyway)</text>
+          <text data-node-label="" data-detail-anchor="" x="680" y="393" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">integracao-sql</text>
+        <text data-detail="context" x="680" y="409" class="t-muted" font-size="9" text-anchor="middle">Views Cross-Schema (Flyway)</text>
         </g>
 
         <g id="node-alunopresente-service" data-node-id="alunopresente-service" data-node-label="alunopresente-svc" tabindex="0" role="button" aria-label="Focus alunopresente-svc, JAR: Presença &amp; Busca Ativa, JARs de Domínio (Classpath Embutido), Spring" aria-pressed="false" data-node-kind="backend" data-node-sublabel="JAR: Presença &amp; Busca Ativa" data-node-context="JARs de Domínio (Classpath Embutido)" data-node-brand="Spring" data-node-brand-id="spring" data-node-brand-status="preset" data-node-brand-source="https://spring.io/trademarks">
           <title>alunopresente-svc · JAR: Presença &amp; Busca Ativa · JARs de Domínio (Classpath Embutido) · Spring</title>
-          <rect x="600" y="520" width="180" height="60" rx="6" class="c-mask"/>
-          <rect x="600" y="520" width="180" height="60" rx="6" class="c-backend" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="backend" class="semantic-sigil s-backend" transform="translate(606 526) scale(0.6875)">
+          <rect x="590" y="470" width="180" height="60" rx="6" class="c-mask"/>
+          <rect x="590" y="470" width="180" height="60" rx="6" class="c-backend" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="backend" class="semantic-sigil s-backend" transform="translate(596 476) scale(0.6875)">
             <path d="M6 3 3 8l3 5M10 3l3 5-3 5"/>
           </g>
-          <g aria-hidden="true" data-brand-mark="spring" data-brand-title="Spring" data-brand-status="preset" data-brand-source="https://spring.io/trademarks" class="brand-mark" transform="translate(758 526)">
+          <g aria-hidden="true" data-brand-mark="spring" data-brand-title="Spring" data-brand-status="preset" data-brand-source="https://spring.io/trademarks" class="brand-mark" transform="translate(748 476)">
             <rect width="16" height="16" rx="4" class="brand-mark-badge"/>
             <path d="M21.8537 1.4158a10.4504 10.4504 0 0 1-1.284 2.2471A11.9666 11.9666 0 1 0 3.8518 20.7757l.4445.3951a11.9543 11.9543 0 0 0 19.6316-8.2971c.3457-3.0126-.568-6.8649-2.0743-11.458zM5.5805 20.8745a1.0174 1.0174 0 1 1-.1482-1.4323 1.0396 1.0396 0 0 1 .1482 1.4323zm16.1991-3.5806c-2.9385 3.9263-9.2601 2.5928-13.2852 2.7904 0 0-.7161.0494-1.4323.1481 0 0 .2717-.1234.6174-.2469 2.8398-.9877 4.1732-1.1853 5.9018-2.0743 3.2349-1.6545 6.4698-5.2844 7.1118-9.0379-1.2347 3.6053-4.9881 6.7167-8.3959 7.9761-2.3459.8643-6.5685 1.7039-6.5685 1.7039l-.1729-.0988c-2.8645-1.4076-2.9632-7.6304 2.2718-9.6306 2.2966-.889 4.4696-.395 6.9637-.9877 2.6422-.6174 5.7043-2.5929 6.939-5.1857 1.3828 4.1732 3.062 10.643.0493 14.6434z" transform="translate(3 3) scale(0.4166666666666667)" fill="#6DB33F"/>
             <rect width="16" height="16" rx="4" class="brand-mark-frame"/>
           </g>
-          <text data-node-label="" data-detail-anchor="" x="690" y="548" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">alunopresente-svc</text>
-        <text data-detail="context" x="690" y="564" class="t-muted" font-size="9" text-anchor="middle">JAR: Presença &amp; Busca Ativa</text>
+          <text data-node-label="" data-detail-anchor="" x="680" y="498" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">alunopresente-svc</text>
+        <text data-detail="context" x="680" y="514" class="t-muted" font-size="9" text-anchor="middle">JAR: Presença &amp; Busca Ativa</text>
         </g>
 
         <g id="node-commons-lib" data-node-id="commons-lib" data-node-label="commons-lib" tabindex="0" role="button" aria-label="Focus commons-lib, A LEI (br.com.commons), JARs de Domínio (Classpath Embutido)" aria-pressed="false" data-node-kind="backend" data-node-sublabel="A LEI (br.com.commons)" data-node-context="JARs de Domínio (Classpath Embutido)">
           <title>commons-lib · A LEI (br.com.commons) · JARs de Domínio (Classpath Embutido)</title>
-          <rect x="600" y="660" width="180" height="50" rx="6" class="c-mask"/>
-          <rect x="600" y="660" width="180" height="50" rx="6" class="c-backend" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="backend" class="semantic-sigil s-backend" transform="translate(606 666) scale(0.6875)">
+          <rect x="590" y="600" width="180" height="50" rx="6" class="c-mask"/>
+          <rect x="590" y="600" width="180" height="50" rx="6" class="c-backend" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="backend" class="semantic-sigil s-backend" transform="translate(596 606) scale(0.6875)">
             <path d="M6 3 3 8l3 5M10 3l3 5-3 5"/>
           </g>
-          <text data-node-label="" data-detail-anchor="" x="690" y="683" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">commons-lib</text>
-        <text data-detail="context" x="690" y="699" class="t-muted" font-size="9" text-anchor="middle">A LEI (br.com.commons)</text>
+          <text data-node-label="" data-detail-anchor="" x="680" y="623" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">commons-lib</text>
+        <text data-detail="context" x="680" y="639" class="t-muted" font-size="9" text-anchor="middle">A LEI (br.com.commons)</text>
         </g>
 
         <g id="node-rabbitmq" data-node-id="rabbitmq" data-node-label="RabbitMQ Broker" tabindex="0" role="button" aria-label="Focus RabbitMQ Broker, AP_HOM_EVENTO (Bruto/Tratado), Broker, Cache &amp; Schemas PostgreSQL, RabbitMQ" aria-pressed="false" data-node-kind="messagebus" data-node-sublabel="AP_HOM_EVENTO (Bruto/Tratado)" data-node-context="Broker, Cache &amp; Schemas PostgreSQL" data-node-brand="RabbitMQ" data-node-brand-id="rabbitmq" data-node-brand-status="preset" data-node-brand-source="https://www.rabbitmq.com">
           <title>RabbitMQ Broker · AP_HOM_EVENTO (Bruto/Tratado) · Broker, Cache &amp; Schemas PostgreSQL · RabbitMQ</title>
-          <rect x="880" y="160" width="180" height="65" rx="6" class="c-mask"/>
-          <rect x="880" y="160" width="180" height="65" rx="6" class="c-messagebus" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="messagebus" class="semantic-sigil s-messagebus" transform="translate(886 166) scale(0.6875)">
+          <rect x="880" y="70" width="180" height="65" rx="6" class="c-mask"/>
+          <rect x="880" y="70" width="180" height="65" rx="6" class="c-messagebus" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="messagebus" class="semantic-sigil s-messagebus" transform="translate(886 76) scale(0.6875)">
             <path d="M2.5 4.5h11M2.5 8h11M2.5 11.5h11"/>
             <circle cx="5" cy="4.5" r="1" class="sigil-fill"/>
             <circle cx="10.5" cy="8" r="1" class="sigil-fill"/>
             <circle cx="7" cy="11.5" r="1" class="sigil-fill"/>
           </g>
-          <g aria-hidden="true" data-brand-mark="rabbitmq" data-brand-title="RabbitMQ" data-brand-status="preset" data-brand-source="https://www.rabbitmq.com" class="brand-mark" transform="translate(1038 166)">
+          <g aria-hidden="true" data-brand-mark="rabbitmq" data-brand-title="RabbitMQ" data-brand-status="preset" data-brand-source="https://www.rabbitmq.com" class="brand-mark" transform="translate(1038 76)">
             <rect width="16" height="16" rx="4" class="brand-mark-badge"/>
             <path d="M23.035 9.601h-7.677a.956.956 0 01-.962-.962V.962a.956.956 0 00-.962-.956H10.56a.956.956 0 00-.962.956V8.64a.956.956 0 01-.962.962H5.762a.956.956 0 01-.961-.962V.962A.956.956 0 003.839 0H.959a.956.956 0 00-.956.962v22.076A.956.956 0 00.965 24h22.07a.956.956 0 00.962-.962V10.58a.956.956 0 00-.962-.98zm-3.86 8.152a1.437 1.437 0 01-1.437 1.443h-1.924a1.437 1.437 0 01-1.436-1.443v-1.917a1.437 1.437 0 011.436-1.443h1.924a1.437 1.437 0 011.437 1.443z" transform="translate(3 3) scale(0.4166666666666667)" fill="#FF6600"/>
             <rect width="16" height="16" rx="4" class="brand-mark-frame"/>
           </g>
-          <text data-node-label="" data-detail-anchor="" x="970" y="190.5" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">RabbitMQ Broker</text>
-        <text data-detail="context" x="970" y="206.5" class="t-muted" font-size="9" text-anchor="middle">AP_HOM_EVENTO (Bruto/Tratado)</text>
+          <text data-node-label="" data-detail-anchor="" x="970" y="100.5" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">RabbitMQ Broker</text>
+        <text data-detail="context" x="970" y="116.5" class="t-muted" font-size="9" text-anchor="middle">AP_HOM_EVENTO (Bruto/Tratado)</text>
         </g>
 
         <g id="node-redis" data-node-id="redis" data-node-label="Redis Cache" tabindex="0" role="button" aria-label="Focus Redis Cache, Deduplica Face 5m &amp; Tokens, Broker, Cache &amp; Schemas PostgreSQL, Redis" aria-pressed="false" data-node-kind="database" data-node-sublabel="Deduplica Face 5m &amp; Tokens" data-node-context="Broker, Cache &amp; Schemas PostgreSQL" data-node-brand="Redis" data-node-brand-id="redis" data-node-brand-status="preset" data-node-brand-source="https://redis.io/brand-guidelines">
           <title>Redis Cache · Deduplica Face 5m &amp; Tokens · Broker, Cache &amp; Schemas PostgreSQL · Redis</title>
-          <rect x="880" y="310" width="180" height="55" rx="6" class="c-mask"/>
-          <rect x="880" y="310" width="180" height="55" rx="6" class="c-database" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="database" class="semantic-sigil s-database" transform="translate(886 316) scale(0.6875)">
+          <rect x="880" y="230" width="180" height="55" rx="6" class="c-mask"/>
+          <rect x="880" y="230" width="180" height="55" rx="6" class="c-database" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="database" class="semantic-sigil s-database" transform="translate(886 236) scale(0.6875)">
             <ellipse cx="8" cy="4" rx="5" ry="2"/>
             <path d="M3 4v8c0 1.1 2.2 2 5 2s5-.9 5-2V4M3 8c0 1.1 2.2 2 5 2s5-.9 5-2"/>
           </g>
-          <g aria-hidden="true" data-brand-mark="redis" data-brand-title="Redis" data-brand-status="preset" data-brand-source="https://redis.io/brand-guidelines" class="brand-mark" transform="translate(1038 316)">
+          <g aria-hidden="true" data-brand-mark="redis" data-brand-title="Redis" data-brand-status="preset" data-brand-source="https://redis.io/brand-guidelines" class="brand-mark" transform="translate(1038 236)">
             <rect width="16" height="16" rx="4" class="brand-mark-badge"/>
             <path d="M22.71 13.145c-1.66 2.092-3.452 4.483-7.038 4.483-3.203 0-4.397-2.825-4.48-5.12.701 1.484 2.073 2.685 4.214 2.63 4.117-.133 6.94-3.852 6.94-7.239 0-4.05-3.022-6.972-8.268-6.972-3.752 0-8.4 1.428-11.455 3.685C2.59 6.937 3.885 9.958 4.35 9.626c2.648-1.904 4.748-3.13 6.784-3.744C8.12 9.244.886 17.05 0 18.425c.1 1.261 1.66 4.648 2.424 4.648.232 0 .431-.133.664-.365a100.49 100.49 0 0 0 5.54-6.765c.222 3.104 1.748 6.898 6.014 6.898 3.819 0 7.604-2.756 9.33-8.965.2-.764-.73-1.361-1.261-.73zm-4.349-5.013c0 1.959-1.926 2.922-3.685 2.922-.941 0-1.664-.247-2.235-.568 1.051-1.592 2.092-3.225 3.21-4.973 1.972.334 2.71 1.43 2.71 2.619z" transform="translate(3 3) scale(0.4166666666666667)" fill="#FF4438"/>
             <rect width="16" height="16" rx="4" class="brand-mark-frame"/>
           </g>
-          <text data-node-label="" data-detail-anchor="" x="970" y="335.5" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Redis Cache</text>
-        <text data-detail="context" x="970" y="351.5" class="t-muted" font-size="9" text-anchor="middle">Deduplica Face 5m &amp; Tokens</text>
+          <text data-node-label="" data-detail-anchor="" x="970" y="255.5" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Redis Cache</text>
+        <text data-detail="context" x="970" y="271.5" class="t-muted" font-size="9" text-anchor="middle">Deduplica Face 5m &amp; Tokens</text>
         </g>
 
         <g id="node-postgres" data-node-id="postgres" data-node-label="PostgreSQL 16" tabindex="0" role="button" aria-label="Focus PostgreSQL 16, base, aluno &amp; integracao_sql, Broker, Cache &amp; Schemas PostgreSQL, PostgreSQL" aria-pressed="false" data-node-kind="database" data-node-sublabel="base, aluno &amp; integracao_sql" data-node-context="Broker, Cache &amp; Schemas PostgreSQL" data-node-brand="PostgreSQL" data-node-brand-id="postgresql" data-node-brand-status="preset" data-node-brand-source="https://wiki.postgresql.org/wiki/Logo">
           <title>PostgreSQL 16 · base, aluno &amp; integracao_sql · Broker, Cache &amp; Schemas PostgreSQL · PostgreSQL</title>
-          <rect x="880" y="490" width="180" height="65" rx="6" class="c-mask"/>
-          <rect x="880" y="490" width="180" height="65" rx="6" class="c-database" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="database" class="semantic-sigil s-database" transform="translate(886 496) scale(0.6875)">
+          <rect x="880" y="420" width="180" height="65" rx="6" class="c-mask"/>
+          <rect x="880" y="420" width="180" height="65" rx="6" class="c-database" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="database" class="semantic-sigil s-database" transform="translate(886 426) scale(0.6875)">
             <ellipse cx="8" cy="4" rx="5" ry="2"/>
             <path d="M3 4v8c0 1.1 2.2 2 5 2s5-.9 5-2V4M3 8c0 1.1 2.2 2 5 2s5-.9 5-2"/>
           </g>
-          <g aria-hidden="true" data-brand-mark="postgresql" data-brand-title="PostgreSQL" data-brand-status="preset" data-brand-source="https://wiki.postgresql.org/wiki/Logo" class="brand-mark" transform="translate(1038 496)">
+          <g aria-hidden="true" data-brand-mark="postgresql" data-brand-title="PostgreSQL" data-brand-status="preset" data-brand-source="https://wiki.postgresql.org/wiki/Logo" class="brand-mark" transform="translate(1038 426)">
             <rect width="16" height="16" rx="4" class="brand-mark-badge"/>
             <path d="M23.5594 14.7228a.5269.5269 0 0 0-.0563-.1191c-.139-.2632-.4768-.3418-1.0074-.2321-1.6533.3411-2.2935.1312-2.5256-.0191 1.342-2.0482 2.445-4.522 3.0411-6.8297.2714-1.0507.7982-3.5237.1222-4.7316a1.5641 1.5641 0 0 0-.1509-.235C21.6931.9086 19.8007.0248 17.5099.0005c-1.4947-.0158-2.7705.3461-3.1161.4794a9.449 9.449 0 0 0-.5159-.0816 8.044 8.044 0 0 0-1.3114-.1278c-1.1822-.0184-2.2038.2642-3.0498.8406-.8573-.3211-4.7888-1.645-7.2219.0788C.9359 2.1526.3086 3.8733.4302 6.3043c.0409.818.5069 3.334 1.2423 5.7436.4598 1.5065.9387 2.7019 1.4334 3.582.553.9942 1.1259 1.5933 1.7143 1.7895.4474.1491 1.1327.1441 1.8581-.7279.8012-.9635 1.5903-1.8258 1.9446-2.2069.4351.2355.9064.3625 1.39.3772a.0569.0569 0 0 0 .0004.0041 11.0312 11.0312 0 0 0-.2472.3054c-.3389.4302-.4094.5197-1.5002.7443-.3102.064-1.1344.2339-1.1464.8115-.0025.1224.0329.2309.0919.3268.2269.4231.9216.6097 1.015.6331 1.3345.3335 2.5044.092 3.3714-.6787-.017 2.231.0775 4.4174.3454 5.0874.2212.5529.7618 1.9045 2.4692 1.9043.2505 0 .5263-.0291.8296-.0941 1.7819-.3821 2.5557-1.1696 2.855-2.9059.1503-.8707.4016-2.8753.5388-4.1012.0169-.0703.0357-.1207.057-.1362.0007-.0005.0697-.0471.4272.0307a.3673.3673 0 0 0 .0443.0068l.2539.0223.0149.001c.8468.0384 1.9114-.1426 2.5312-.4308.6438-.2988 1.8057-1.0323 1.5951-1.6698zM2.371 11.8765c-.7435-2.4358-1.1779-4.8851-1.2123-5.5719-.1086-2.1714.4171-3.6829 1.5623-4.4927 1.8367-1.2986 4.8398-.5408 6.108-.13-.0032.0032-.0066.0061-.0098.0094-2.0238 2.044-1.9758 5.536-1.9708 5.7495-.0002.0823.0066.1989.0162.3593.0348.5873.0996 1.6804-.0735 2.9184-.1609 1.1504.1937 2.2764.9728 3.0892.0806.0841.1648.1631.2518.2374-.3468.3714-1.1004 1.1926-1.9025 2.1576-.5677.6825-.9597.5517-1.0886.5087-.3919-.1307-.813-.5871-1.2381-1.3223-.4796-.839-.9635-2.0317-1.4155-3.5126zm6.0072 5.0871c-.1711-.0428-.3271-.1132-.4322-.1772.0889-.0394.2374-.0902.4833-.1409 1.2833-.2641 1.4815-.4506 1.9143-1.0002.0992-.126.2116-.2687.3673-.4426a.3549.3549 0 0 0 .0737-.1298c.1708-.1513.2724-.1099.4369-.0417.156.0646.3078.26.3695.4752.0291.1016.0619.2945-.0452.4444-.9043 1.2658-2.2216 1.2494-3.1676 1.0128zm2.094-3.988-.0525.141c-.133.3566-.2567.6881-.3334 1.003-.6674-.0021-1.3168-.2872-1.8105-.8024-.6279-.6551-.9131-1.5664-.7825-2.5004.1828-1.3079.1153-2.4468.079-3.0586-.005-.0857-.0095-.1607-.0122-.2199.2957-.2621 1.6659-.9962 2.6429-.7724.4459.1022.7176.4057.8305.928.5846 2.7038.0774 3.8307-.3302 4.7363-.084.1866-.1633.3629-.2311.5454zm7.3637 4.5725c-.0169.1768-.0358.376-.0618.5959l-.146.4383a.3547.3547 0 0 0-.0182.1077c-.0059.4747-.054.6489-.115.8693-.0634.2292-.1353.4891-.1794 1.0575-.11 1.4143-.8782 2.2267-2.4172 2.5565-1.5155.3251-1.7843-.4968-2.0212-1.2217a6.5824 6.5824 0 0 0-.0769-.2266c-.2154-.5858-.1911-1.4119-.1574-2.5551.0165-.5612-.0249-1.9013-.3302-2.6462.0044-.2932.0106-.5909.019-.8918a.3529.3529 0 0 0-.0153-.1126 1.4927 1.4927 0 0 0-.0439-.208c-.1226-.4283-.4213-.7866-.7797-.9351-.1424-.059-.4038-.1672-.7178-.0869.067-.276.1831-.5875.309-.9249l.0529-.142c.0595-.16.134-.3257.213-.5012.4265-.9476 1.0106-2.2453.3766-5.1772-.2374-1.0981-1.0304-1.6343-2.2324-1.5098-.7207.0746-1.3799.3654-1.7088.5321a5.6716 5.6716 0 0 0-.1958.1041c.0918-1.1064.4386-3.1741 1.7357-4.4823a4.0306 4.0306 0 0 1 .3033-.276.3532.3532 0 0 0 .1447-.0644c.7524-.5706 1.6945-.8506 2.802-.8325.4091.0067.8017.0339 1.1742.081 1.939.3544 3.2439 1.4468 4.0359 2.3827.8143.9623 1.2552 1.9315 1.4312 2.4543-1.3232-.1346-2.2234.1268-2.6797.779-.9926 1.4189.543 4.1729 1.2811 5.4964.1353.2426.2522.4522.2889.5413.2403.5825.5515.9713.7787 1.2552.0696.087.1372.1714.1885.245-.4008.1155-1.1208.3825-1.0552 1.717-.0123.1563-.0423.4469-.0834.8148-.0461.2077-.0702.4603-.0994.7662zm.8905-1.6211c-.0405-.8316.2691-.9185.5967-1.0105a2.8566 2.8566 0 0 0 .135-.0406 1.202 1.202 0 0 0 .1342.103c.5703.3765 1.5823.4213 3.0068.1344-.2016.1769-.5189.3994-.9533.6011-.4098.1903-1.0957.333-1.7473.3636-.7197.0336-1.0859-.0807-1.1721-.151zm.5695-9.2712c-.0059.3508-.0542.6692-.1054 1.0017-.055.3576-.112.7274-.1264 1.1762-.0142.4368.0404.8909.0932 1.3301.1066.887.216 1.8003-.2075 2.7014a3.5272 3.5272 0 0 1-.1876-.3856c-.0527-.1276-.1669-.3326-.3251-.6162-.6156-1.1041-2.0574-3.6896-1.3193-4.7446.3795-.5427 1.3408-.5661 2.1781-.463zm.2284 7.0137a12.3762 12.3762 0 0 0-.0853-.1074l-.0355-.0444c.7262-1.1995.5842-2.3862.4578-3.4385-.0519-.4318-.1009-.8396-.0885-1.2226.0129-.4061.0666-.7543.1185-1.0911.0639-.415.1288-.8443.1109-1.3505.0134-.0531.0188-.1158.0118-.1902-.0457-.4855-.5999-1.938-1.7294-3.253-.6076-.7073-1.4896-1.4972-2.6889-2.0395.5251-.1066 1.2328-.2035 2.0244-.1859 2.0515.0456 3.6746.8135 4.8242 2.2824a.908.908 0 0 1 .0667.1002c.7231 1.3556-.2762 6.2751-2.9867 10.5405zm-8.8166-6.1162c-.025.1794-.3089.4225-.6211.4225a.5821.5821 0 0 1-.0809-.0056c-.1873-.026-.3765-.144-.5059-.3156-.0458-.0605-.1203-.178-.1055-.2844.0055-.0401.0261-.0985.0925-.1488.1182-.0894.3518-.1226.6096-.0867.3163.0441.6426.1938.6113.4186zm7.9305-.4114c.0111.0792-.049.201-.1531.3102-.0683.0717-.212.1961-.4079.2232a.5456.5456 0 0 1-.075.0052c-.2935 0-.5414-.2344-.5607-.3717-.024-.1765.2641-.3106.5611-.352.297-.0414.6111.0088.6356.1851z" transform="translate(3 3) scale(0.4166666666666667)" fill="#4169E1"/>
             <rect width="16" height="16" rx="4" class="brand-mark-frame"/>
           </g>
-          <text data-node-label="" data-detail-anchor="" x="970" y="520.5" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">PostgreSQL 16</text>
-        <text data-detail="context" x="970" y="536.5" class="t-muted" font-size="9" text-anchor="middle">base, aluno &amp; integracao_sql</text>
+          <text data-node-label="" data-detail-anchor="" x="970" y="450.5" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">PostgreSQL 16</text>
+        <text data-detail="context" x="970" y="466.5" class="t-muted" font-size="9" text-anchor="middle">base, aluno &amp; integracao_sql</text>
         </g>
 
         <g id="node-firebase" data-node-id="firebase" data-node-label="Firebase FCM" tabindex="0" role="button" aria-label="Focus Firebase FCM, Push Pais / Responsáveis, Broker, Cache &amp; Schemas PostgreSQL" aria-pressed="false" data-node-kind="backend" data-node-sublabel="Push Pais / Responsáveis" data-node-context="Broker, Cache &amp; Schemas PostgreSQL">
           <title>Firebase FCM · Push Pais / Responsáveis · Broker, Cache &amp; Schemas PostgreSQL</title>
-          <rect x="880" y="650" width="180" height="50" rx="6" class="c-mask"/>
-          <rect x="880" y="650" width="180" height="50" rx="6" class="c-backend" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="backend" class="semantic-sigil s-backend" transform="translate(886 656) scale(0.6875)">
+          <rect x="880" y="580" width="180" height="50" rx="6" class="c-mask"/>
+          <rect x="880" y="580" width="180" height="50" rx="6" class="c-backend" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="backend" class="semantic-sigil s-backend" transform="translate(886 586) scale(0.6875)">
             <path d="M6 3 3 8l3 5M10 3l3 5-3 5"/>
           </g>
-          <text data-node-label="" data-detail-anchor="" x="970" y="673" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Firebase FCM</text>
-        <text data-detail="context" x="970" y="689" class="t-muted" font-size="9" text-anchor="middle">Push Pais / Responsáveis</text>
+          <text data-node-label="" data-detail-anchor="" x="970" y="603" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Firebase FCM</text>
+        <text data-detail="context" x="970" y="619" class="t-muted" font-size="9" text-anchor="middle">Push Pais / Responsáveis</text>
         </g>
 
         <!-- Connection labels -->
-        <g data-detail="context" data-edge-from="cameras-entrada" data-edge-to="base-api" data-edge-label="Entrada (TCP)" data-edge-key="0" data-edge-id="cam-ent-to-baseapi">
-          <rect x="218.8" y="90" width="72.4" height="14" rx="3" class="c-mask"/>
-          <text x="255" y="100" class="t-backend" font-size="8" text-anchor="middle">Entrada (TCP)</text>
+        <g data-detail="context" data-edge-from="cameras-kit" data-edge-to="base-api" data-edge-label="Alarme Facial (TCP :50000)" data-edge-key="0" data-edge-id="cam-to-baseapi">
+          <rect x="197.6" y="189" width="134.8" height="14" rx="3" class="c-mask"/>
+          <text x="265" y="199" class="t-backend" font-size="8" text-anchor="middle">Alarme Facial (TCP :50000)</text>
         </g>
-        <g data-detail="context" data-edge-from="cameras-saida" data-edge-to="base-api" data-edge-label="Saída (TCP)" data-edge-key="1" data-edge-id="cam-sai-to-baseapi">
-          <rect x="223.6" y="170" width="62.8" height="14" rx="3" class="c-mask"/>
-          <text x="255" y="180" class="t-backend" font-size="8" text-anchor="middle">Saída (TCP)</text>
+        <g data-detail="context" data-edge-from="baseweb" data-edge-to="base-api" data-edge-label="REST &amp; WSS Stream" data-edge-key="1" data-edge-id="bw-to-baseapi">
+          <rect x="214.2" y="261.25" width="91.6" height="14" rx="3" class="c-mask"/>
+          <text x="260" y="271.25" class="t-backend" font-size="8" text-anchor="middle">REST &amp; WSS Stream</text>
         </g>
-        <g data-detail="context" data-edge-from="cameras-refeitorio" data-edge-to="base-api" data-edge-label="Refeitório (TCP)" data-edge-key="2" data-edge-id="cam-ref-to-baseapi">
-          <rect x="211.6" y="220" width="86.8" height="14" rx="3" class="c-mask"/>
-          <text x="255" y="230" class="t-backend" font-size="8" text-anchor="middle">Refeitório (TCP)</text>
+        <g data-detail="context" data-edge-from="educacaoweb" data-edge-to="educacao-api" data-edge-label="REST JSON" data-edge-key="2" data-edge-id="ew-to-educapi">
+          <rect x="233.4" y="511.25" width="53.199999999999996" height="14" rx="3" class="c-mask"/>
+          <text x="260" y="521.25" class="t-backend" font-size="8" text-anchor="middle">REST JSON</text>
         </g>
-        <g data-detail="context" data-edge-from="baseweb" data-edge-to="base-api" data-edge-label="REST &amp; WSS Stream" data-edge-key="3" data-edge-id="bw-to-baseapi">
-          <rect x="224.2" y="311.25" width="91.6" height="14" rx="3" class="c-mask"/>
-          <text x="270" y="321.25" class="t-backend" font-size="8" text-anchor="middle">REST &amp; WSS Stream</text>
+        <g data-detail="context" data-edge-from="educacao-api" data-edge-to="base-api" data-edge-label="REST Sync (Fotos/Faces)" data-edge-key="3" data-edge-id="educapi-to-baseapi">
+          <rect x="344.8" y="310" width="120.39999999999999" height="14" rx="3" class="c-mask"/>
+          <text x="405" y="320" class="t-backend" font-size="8" text-anchor="middle">REST Sync (Fotos/Faces)</text>
         </g>
-        <g data-detail="context" data-edge-from="educacaoweb" data-edge-to="educacao-api" data-edge-label="REST JSON" data-edge-key="4" data-edge-id="ew-to-educapi">
-          <rect x="243.4" y="571.25" width="53.199999999999996" height="14" rx="3" class="c-mask"/>
-          <text x="270" y="581.25" class="t-backend" font-size="8" text-anchor="middle">REST JSON</text>
+        <g data-detail="context" data-edge-from="base-api" data-edge-to="rabbitmq" data-edge-label="1. Publica Bruto" data-edge-key="4" data-edge-id="baseapi-to-rmq">
+          <rect x="812.6" y="139" width="86.8" height="14" rx="3" class="c-mask"/>
+          <text x="856" y="149" class="t-backend" font-size="8" text-anchor="middle">1. Publica Bruto</text>
         </g>
-        <g data-detail="context" data-edge-from="educacao-api" data-edge-to="base-api" data-edge-label="REST Sync (Fotos/Faces)" data-edge-key="5" data-edge-id="educapi-to-baseapi">
-          <rect x="364.8" y="360" width="120.39999999999999" height="14" rx="3" class="c-mask"/>
-          <text x="425" y="370" class="t-backend" font-size="8" text-anchor="middle">REST Sync (Fotos/Faces)</text>
+        <g data-detail="context" data-edge-from="rabbitmq" data-edge-to="base-service" data-edge-label="2. Consome Bruto" data-edge-key="5" data-edge-id="rmq-to-basesvc">
+          <rect x="706.6" y="32" width="86.8" height="14" rx="3" class="c-mask"/>
+          <text x="750" y="42" class="t-muted" font-size="8" text-anchor="middle">2. Consome Bruto</text>
         </g>
-        <g data-detail="context" data-edge-from="base-api" data-edge-to="rabbitmq" data-edge-label="1. Publica Bruto" data-edge-key="6" data-edge-id="baseapi-to-rmq">
-          <rect x="490.6" y="142.5" width="86.8" height="14" rx="3" class="c-mask"/>
-          <text x="534" y="152.5" class="t-backend" font-size="8" text-anchor="middle">1. Publica Bruto</text>
+        <g data-detail="context" data-edge-from="base-service" data-edge-to="redis" data-edge-label="3. Deduplica 5 min" data-edge-key="6" data-edge-id="basesvc-to-redis">
+          <rect x="776.8" y="169" width="96.39999999999999" height="14" rx="3" class="c-mask"/>
+          <text x="825" y="179" class="t-muted" font-size="8" text-anchor="middle">3. Deduplica 5 min</text>
         </g>
-        <g data-detail="context" data-edge-from="rabbitmq" data-edge-to="base-service" data-edge-label="2. Consome Bruto 01" data-edge-key="7" data-edge-id="rmq-to-basesvc">
-          <rect x="779.4" y="115.33333333333334" width="101.2" height="14" rx="3" class="c-mask"/>
-          <text x="830" y="125.33333333333334" class="t-muted" font-size="8" text-anchor="middle">2. Consome Bruto 01</text>
+        <g data-detail="context" data-edge-from="base-service" data-edge-to="rabbitmq" data-edge-label="4. Publica Tratado" data-edge-key="7" data-edge-id="basesvc-to-rmq">
+          <rect x="761.8" y="20" width="96.39999999999999" height="14" rx="3" class="c-mask"/>
+          <text x="810" y="30" class="t-muted" font-size="8" text-anchor="middle">4. Publica Tratado</text>
         </g>
-        <g data-detail="context" data-edge-from="base-service" data-edge-to="redis" data-edge-label="3. Deduplica 5 min" data-edge-key="8" data-edge-id="basesvc-to-redis">
-          <rect x="781.8" y="229.41666666666669" width="96.39999999999999" height="14" rx="3" class="c-mask"/>
-          <text x="830" y="239.41666666666669" class="t-muted" font-size="8" text-anchor="middle">3. Deduplica 5 min</text>
+        <g data-detail="context" data-edge-from="rabbitmq" data-edge-to="alunopresente-service" data-edge-label="5. Consome Tratado" data-edge-key="8" data-edge-id="rmq-to-alunosvc">
+          <rect x="776.8" y="294.25" width="96.39999999999999" height="14" rx="3" class="c-mask"/>
+          <text x="825" y="304.25" class="t-backend" font-size="8" text-anchor="middle">5. Consome Tratado</text>
         </g>
-        <g data-detail="context" data-edge-from="base-service" data-edge-to="rabbitmq" data-edge-label="4. Publica Tratado" data-edge-key="9" data-edge-id="basesvc-to-rmq">
-          <rect x="781.8" y="91" width="96.39999999999999" height="14" rx="3" class="c-mask"/>
-          <text x="830" y="101" class="t-muted" font-size="8" text-anchor="middle">4. Publica Tratado</text>
+        <g data-detail="context" data-edge-from="alunopresente-service" data-edge-to="firebase" data-edge-label="6. Push Pais" data-edge-key="9" data-edge-id="alunosvc-to-fcm">
+          <rect x="791.2" y="554.5" width="67.6" height="14" rx="3" class="c-mask"/>
+          <text x="825" y="564.5" class="t-muted" font-size="8" text-anchor="middle">6. Push Pais</text>
         </g>
-        <g data-detail="context" data-edge-from="rabbitmq" data-edge-to="alunopresente-service" data-edge-label="5. Consome Tratado 02" data-edge-key="10" data-edge-id="rmq-to-alunosvc">
-          <rect x="774.6" y="376" width="110.8" height="14" rx="3" class="c-mask"/>
-          <text x="830" y="386" class="t-backend" font-size="8" text-anchor="middle">5. Consome Tratado 02</text>
+        <g data-detail="context" data-edge-from="base-service" data-edge-to="postgres" data-edge-label="Grava base.evento" data-edge-key="10" data-edge-id="basesvc-to-pg">
+          <rect x="779.2" y="266.5" width="91.6" height="14" rx="3" class="c-mask"/>
+          <text x="825" y="276.5" class="t-muted" font-size="8" text-anchor="middle">Grava base.evento</text>
         </g>
-        <g data-detail="context" data-edge-from="alunopresente-service" data-edge-to="firebase" data-edge-label="6. Dispara Push Pais" data-edge-key="11" data-edge-id="alunosvc-to-fcm">
-          <rect x="777" y="611" width="106" height="14" rx="3" class="c-mask"/>
-          <text x="830" y="621" class="t-muted" font-size="8" text-anchor="middle">6. Dispara Push Pais</text>
+        <g data-detail="context" data-edge-from="integracao-sql" data-edge-to="postgres" data-edge-label="Views base ⇄ aluno" data-edge-key="11" data-edge-id="integracao-to-pg">
+          <rect x="776.8" y="413.75" width="96.39999999999999" height="14" rx="3" class="c-mask"/>
+          <text x="825" y="423.75" class="t-backend" font-size="8" text-anchor="middle">Views base ⇄ aluno</text>
         </g>
-        <g data-detail="context" data-edge-from="base-service" data-edge-to="postgres" data-edge-label="Grava base.evento" data-edge-key="12" data-edge-id="basesvc-to-pg">
-          <rect x="784.2" y="322.25" width="91.6" height="14" rx="3" class="c-mask"/>
-          <text x="830" y="332.25" class="t-muted" font-size="8" text-anchor="middle">Grava base.evento</text>
+        <g data-detail="context" data-edge-from="alunopresente-service" data-edge-to="postgres" data-edge-label="Presenças &amp; Consultas" data-edge-key="12" data-edge-id="alunosvc-to-pg">
+          <rect x="769.6" y="473.25" width="110.8" height="14" rx="3" class="c-mask"/>
+          <text x="825" y="483.25" class="t-backend" font-size="8" text-anchor="middle">Presenças &amp; Consultas</text>
         </g>
-        <g data-detail="context" data-edge-from="integracao-sql" data-edge-to="postgres" data-edge-label="Views base ⇄ aluno" data-edge-key="13" data-edge-id="integracao-to-pg">
-          <rect x="781.8" y="472.25" width="96.39999999999999" height="14" rx="3" class="c-mask"/>
-          <text x="830" y="482.25" class="t-backend" font-size="8" text-anchor="middle">Views base ⇄ aluno</text>
+        <g data-detail="context" data-edge-from="base-api" data-edge-to="base-service" data-edge-label="Classpath" data-edge-key="13" data-edge-id="baseapi-embed-basesvc">
+          <rect x="513.4" y="85" width="53.199999999999996" height="14" rx="3" class="c-mask"/>
+          <text x="540" y="95" class="t-messagebus" font-size="8" text-anchor="middle">Classpath</text>
         </g>
-        <g data-detail="context" data-edge-from="alunopresente-service" data-edge-to="postgres" data-edge-label="Presenças &amp; Consultas" data-edge-key="14" data-edge-id="alunosvc-to-pg">
-          <rect x="784.6" y="585" width="110.8" height="14" rx="3" class="c-mask"/>
-          <text x="840" y="595" class="t-backend" font-size="8" text-anchor="middle">Presenças &amp; Consultas</text>
+        <g data-detail="context" data-edge-from="educacao-api" data-edge-to="alunopresente-service" data-edge-label="Classpath" data-edge-key="14" data-edge-id="educapi-embed-alunosvc">
+          <rect x="513.4" y="462.5" width="53.199999999999996" height="14" rx="3" class="c-mask"/>
+          <text x="540" y="472.5" class="t-messagebus" font-size="8" text-anchor="middle">Classpath</text>
         </g>
-        <g data-detail="context" data-edge-from="base-api" data-edge-to="base-service" data-edge-label="Classpath" data-edge-key="15" data-edge-id="baseapi-embed-basesvc">
-          <rect x="528.4" y="116.5" width="53.199999999999996" height="14" rx="3" class="c-mask"/>
-          <text x="555" y="126.5" class="t-messagebus" font-size="8" text-anchor="middle">Classpath</text>
+        <g data-detail="context" data-edge-from="alunopresente-service" data-edge-to="commons-lib" data-edge-label="AppBaseEntity" data-edge-key="15" data-edge-id="alunosvc-to-commons">
+          <rect x="643.8" y="534" width="72.4" height="14" rx="3" class="c-mask"/>
+          <text x="680" y="544" class="t-messagebus" font-size="8" text-anchor="middle">AppBaseEntity</text>
         </g>
-        <g data-detail="context" data-edge-from="educacao-api" data-edge-to="alunopresente-service" data-edge-label="Classpath" data-edge-key="16" data-edge-id="educapi-embed-alunosvc">
-          <rect x="528.4" y="512.5" width="53.199999999999996" height="14" rx="3" class="c-mask"/>
-          <text x="555" y="522.5" class="t-messagebus" font-size="8" text-anchor="middle">Classpath</text>
-        </g>
-        <g data-detail="context" data-edge-from="alunopresente-service" data-edge-to="commons-lib" data-edge-label="AppBaseEntity" data-edge-key="17" data-edge-id="alunosvc-to-commons">
-          <rect x="653.8" y="584" width="72.4" height="14" rx="3" class="c-mask"/>
-          <text x="690" y="594" class="t-messagebus" font-size="8" text-anchor="middle">AppBaseEntity</text>
-        </g>
-        <g data-detail="context" data-edge-from="base-service" data-edge-to="cameras-entrada" data-edge-label="Sync FDLib (Faces)" data-edge-key="18" data-edge-id="sync-faces-cam">
-          <rect x="356.8" y="1" width="96.39999999999999" height="14" rx="3" class="c-mask"/>
-          <text x="405" y="11" class="t-messagebus" font-size="8" text-anchor="middle">Sync FDLib (Faces)</text>
+        <g data-detail="context" data-edge-from="base-service" data-edge-to="cameras-kit" data-edge-label="Sync FDLib (Faces)" data-edge-key="16" data-edge-id="sync-faces-cam">
+          <rect x="354.3" y="6" width="96.39999999999999" height="14" rx="3" class="c-mask"/>
+          <text x="402.5" y="16" class="t-messagebus" font-size="8" text-anchor="middle">Sync FDLib (Faces)</text>
         </g>
 
         <!-- Boundary labels (foreground masks keep routes out of titles) -->
-        <g data-graph-role="structural-frame-label" data-composition-frame-id="0" data-composition-frame-kind="security-group" data-composition-frame-label="1 Kit = 6 Câmeras IA (1-2 Kits/Escola)">
-          <rect data-graph-role="structural-frame-label-mask" x="14" y="45" width="211.99999999999997" height="16" rx="3" class="c-mask"/>
-          <text data-boundary-label="" x="18" y="57.859649122807014" class="t-security" font-size="8.859649122807017" font-weight="600">1 Kit = 6 Câmeras IA (1-2 Kits/Escola)</text>
+        <g data-graph-role="structural-frame-label" data-composition-frame-id="0" data-composition-frame-kind="security-group" data-composition-frame-label="Frontends Angular 19">
+          <rect data-graph-role="structural-frame-label-mask" x="14" y="360" width="118" height="16" rx="3" class="c-mask"/>
+          <text data-boundary-label="" x="18" y="373" class="t-security" font-size="9" font-weight="600">Frontends Angular 19</text>
         </g>
 
-        <g data-graph-role="structural-frame-label" data-composition-frame-id="1" data-composition-frame-kind="security-group" data-composition-frame-label="Frontends Angular 19">
-          <rect data-graph-role="structural-frame-label-mask" x="14" y="420" width="118" height="16" rx="3" class="c-mask"/>
-          <text data-boundary-label="" x="18" y="433" class="t-security" font-size="9" font-weight="600">Frontends Angular 19</text>
+        <g data-graph-role="structural-frame-label" data-composition-frame-id="1" data-composition-frame-kind="region" data-composition-frame-label="APIs Executáveis Spring Boot">
+          <rect data-graph-role="structural-frame-label-mask" x="294" y="100" width="161.2" height="16" rx="3" class="c-mask"/>
+          <text data-boundary-label="" x="298" y="113" class="t-cloud" font-size="9" font-weight="600">APIs Executáveis Spring Boot</text>
         </g>
 
-        <g data-graph-role="structural-frame-label" data-composition-frame-id="2" data-composition-frame-kind="region" data-composition-frame-label="APIs Executáveis Spring Boot">
-          <rect data-graph-role="structural-frame-label-mask" x="314" y="140" width="161.2" height="16" rx="3" class="c-mask"/>
-          <text data-boundary-label="" x="318" y="153" class="t-cloud" font-size="9" font-weight="600">APIs Executáveis Spring Boot</text>
+        <g data-graph-role="structural-frame-label" data-composition-frame-id="2" data-composition-frame-kind="region" data-composition-frame-label="JARs de Domínio (Classpath Embutido)">
+          <rect data-graph-role="structural-frame-label-mask" x="564" y="50" width="204.4" height="16" rx="3" class="c-mask"/>
+          <text data-boundary-label="" x="568" y="63" class="t-cloud" font-size="9" font-weight="600">JARs de Domínio (Classpath Embutido)</text>
         </g>
 
-        <g data-graph-role="structural-frame-label" data-composition-frame-id="3" data-composition-frame-kind="region" data-composition-frame-label="JARs de Domínio (Classpath Embutido)">
-          <rect data-graph-role="structural-frame-label-mask" x="574" y="80" width="204.4" height="16" rx="3" class="c-mask"/>
-          <text data-boundary-label="" x="578" y="93" class="t-cloud" font-size="9" font-weight="600">JARs de Domínio (Classpath Embutido)</text>
-        </g>
-
-        <g data-graph-role="structural-frame-label" data-composition-frame-id="4" data-composition-frame-kind="security-group" data-composition-frame-label="Broker, Cache &amp; Schemas PostgreSQL">
-          <rect data-graph-role="structural-frame-label-mask" x="854" y="140" width="193.6" height="16" rx="3" class="c-mask"/>
-          <text data-boundary-label="" x="858" y="153" class="t-security" font-size="9" font-weight="600">Broker, Cache &amp; Schemas PostgreSQL</text>
+        <g data-graph-role="structural-frame-label" data-composition-frame-id="3" data-composition-frame-kind="security-group" data-composition-frame-label="Broker, Cache &amp; Schemas PostgreSQL">
+          <rect data-graph-role="structural-frame-label-mask" x="854" y="50" width="193.6" height="16" rx="3" class="c-mask"/>
+          <text data-boundary-label="" x="858" y="63" class="t-security" font-size="9" font-weight="600">Broker, Cache &amp; Schemas PostgreSQL</text>
         </g>
 
         <!-- Legend -->
         <g data-legend="" data-legend-bridge="">
-          <text x="40" y="764" class="t-primary" font-size="12" font-weight="650">Legend</text>
-          <g data-legend-semantic-kind="frontend" data-legend-kind="frontend" data-legend-label="Frontend" data-legend-x="40" data-legend-baseline="784" data-legend-width="83">
-            <rect x="40" y="775" width="16" height="10" rx="2.5" class="c-frontend" stroke-width="1"/>
-            <text x="62" y="784" class="t-muted" font-size="10" font-weight="500">Frontend</text>
+          <text x="40" y="714" class="t-primary" font-size="12" font-weight="650">Legend</text>
+          <g data-legend-semantic-kind="frontend" data-legend-kind="frontend" data-legend-label="Frontend" data-legend-x="40" data-legend-baseline="734" data-legend-width="83">
+            <rect x="40" y="725" width="16" height="10" rx="2.5" class="c-frontend" stroke-width="1"/>
+            <text x="62" y="734" class="t-muted" font-size="10" font-weight="500">Frontend</text>
           </g>
-          <g data-legend-semantic-kind="backend" data-legend-kind="backend" data-legend-label="Backend" data-legend-x="145" data-legend-baseline="784" data-legend-width="78">
-            <rect x="145" y="775" width="16" height="10" rx="2.5" class="c-backend" stroke-width="1"/>
-            <text x="167" y="784" class="t-muted" font-size="10" font-weight="500">Backend</text>
+          <g data-legend-semantic-kind="backend" data-legend-kind="backend" data-legend-label="Backend" data-legend-x="145" data-legend-baseline="734" data-legend-width="78">
+            <rect x="145" y="725" width="16" height="10" rx="2.5" class="c-backend" stroke-width="1"/>
+            <text x="167" y="734" class="t-muted" font-size="10" font-weight="500">Backend</text>
           </g>
-          <g data-legend-semantic-kind="database" data-legend-kind="database" data-legend-label="Database" data-legend-x="245" data-legend-baseline="784" data-legend-width="83">
-            <rect x="245" y="775" width="16" height="10" rx="2.5" class="c-database" stroke-width="1"/>
-            <text x="267" y="784" class="t-muted" font-size="10" font-weight="500">Database</text>
+          <g data-legend-semantic-kind="database" data-legend-kind="database" data-legend-label="Database" data-legend-x="245" data-legend-baseline="734" data-legend-width="83">
+            <rect x="245" y="725" width="16" height="10" rx="2.5" class="c-database" stroke-width="1"/>
+            <text x="267" y="734" class="t-muted" font-size="10" font-weight="500">Database</text>
           </g>
-          <g data-legend-semantic-kind="security" data-legend-kind="security" data-legend-label="Security" data-legend-x="350" data-legend-baseline="784" data-legend-width="83">
-            <rect x="350" y="775" width="16" height="10" rx="2.5" class="c-security" stroke-width="1"/>
-            <text x="372" y="784" class="t-muted" font-size="10" font-weight="500">Security</text>
+          <g data-legend-semantic-kind="security" data-legend-kind="security" data-legend-label="Security" data-legend-x="350" data-legend-baseline="734" data-legend-width="83">
+            <rect x="350" y="725" width="16" height="10" rx="2.5" class="c-security" stroke-width="1"/>
+            <text x="372" y="734" class="t-muted" font-size="10" font-weight="500">Security</text>
           </g>
-          <g data-legend-semantic-kind="messagebus" data-legend-kind="messagebus" data-legend-label="Message bus" data-legend-x="455" data-legend-baseline="784" data-legend-width="98">
-            <rect x="455" y="775" width="16" height="10" rx="2.5" class="c-messagebus" stroke-width="1"/>
-            <text x="477" y="784" class="t-muted" font-size="10" font-weight="500">Message bus</text>
+          <g data-legend-semantic-kind="messagebus" data-legend-kind="messagebus" data-legend-label="Message bus" data-legend-x="455" data-legend-baseline="734" data-legend-width="98">
+            <rect x="455" y="725" width="16" height="10" rx="2.5" class="c-messagebus" stroke-width="1"/>
+            <text x="477" y="734" class="t-muted" font-size="10" font-weight="500">Message bus</text>
           </g>
         </g>
       </svg>
@@ -5743,18 +5704,18 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
         </div>
         <ul>
           <li>&bull; 1 Kit: 2 Entrada + 2 Saída + 2 Refeitório. Escolas possuem 1 ou 2 Kits</li>
-          <li>&bull; Reconhecimento 100% no hardware da câmera (Edge AI, NPU + FDLib local) em &lt; 200ms</li>
+          <li>&bull; Reconhecimento 100% no hardware (Edge AI, NPU + FDLib) em &lt; 200ms</li>
         </ul>
       </div>
 
       <div class="card">
         <div class="card-header">
           <div class="card-dot violet"></div>
-          <h3>Ciclo de Presença, Refeitório &amp; Push FCM</h3>
+          <h3>Ciclo de Presença &amp; Push FCM</h3>
         </div>
         <ul>
-          <li>&bull; RabbitMQ Tratado alimenta alunopresente-service para chamada, refeitório e Busca Ativa</li>
-          <li>&bull; Disparo imediato de Push Notification aos pais via Firebase Cloud Messaging</li>
+          <li>&bull; RabbitMQ Tratado alimenta alunopresente-svc para chamada, refeitório e Busca Ativa</li>
+          <li>&bull; Push Notification imediato aos pais via Firebase Cloud Messaging</li>
         </ul>
       </div>
 
@@ -5764,9 +5725,9 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
           <h3>Comunicação Base ⇄ Educação (3 Canais)</h3>
         </div>
         <ul>
-          <li>&bull; REST HTTP: educacao-api envia fotos/faces ao base-api via IntegracaoBaseService</li>
-          <li>&bull; Views SQL: módulo integracao-sql cria views Flyway cruzando schemas base e alunopresente</li>
-          <li>&bull; RabbitMQ: base publica eventos tratados consumidos por alunopresente-service</li>
+          <li>&bull; REST: educacao-api envia fotos/faces ao base-api via IntegracaoBaseService</li>
+          <li>&bull; Views SQL: integracao-sql cruza schemas base e alunopresente (Flyway)</li>
+          <li>&bull; RabbitMQ: base publica eventos tratados consumidos por alunopresente-svc</li>
         </ul>
       </div>
     </div>
