@@ -37,7 +37,7 @@ tableOfContents: false
       </button>
     </div>
   </div>
-  <iframe id="frame-seq" src="/diagrams/presence-facial-sequence.html" class="diagram-frame"></iframe>
+  <iframe id="frame-seq" src="/diagrams/presence-facial-sequence.html?embed=1" class="diagram-frame"></iframe>
 </div>
 
 <div class="diagram-tips">

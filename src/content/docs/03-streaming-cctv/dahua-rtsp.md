@@ -28,7 +28,7 @@ O diagrama abaixo apresenta o fluxo temporal de negociação RTSP (OPTIONS, DESC
       </button>
     </div>
   </div>
-  <iframe id="frame-dah-seq" src="/diagrams/dahua-stream-sequence.html" class="diagram-frame"></iframe>
+  <iframe id="frame-dah-seq" src="/diagrams/dahua-stream-sequence.html?embed=1" class="diagram-frame"></iframe>
 </div>
 
 ---

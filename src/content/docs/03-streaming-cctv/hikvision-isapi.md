@@ -28,7 +28,7 @@ O diagrama abaixo ilustra o aperto de mão completo, a negociação de SDP e o f
       </button>
     </div>
   </div>
-  <iframe id="frame-hik-seq" src="/diagrams/hikvision-stream-sequence.html" class="diagram-frame"></iframe>
+  <iframe id="frame-hik-seq" src="/diagrams/hikvision-stream-sequence.html?embed=1" class="diagram-frame"></iframe>
 </div>
 
 ---
