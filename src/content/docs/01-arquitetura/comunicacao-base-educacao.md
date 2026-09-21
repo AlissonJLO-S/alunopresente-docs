@@ -1,133 +1,198 @@
 ---
-title: Comunicação Base ⇄ Educação (REST vs Views SQL)
-description: Diretrizes de arquitetura para escolha entre integração via REST HTTP e Views SQL, padrão de loop fechado e mapeamento detalhado de schedules e timers de sincronização.
+title: Comunicação Base ⇄ Educação (REST vs. Views SQL)
+description: Como escolher entre REST, views SQL e comandos cross-schema na integração entre educacao-api, base-api e equipamentos.
 ---
 
-O ecossistema divide as responsabilidades centrais entre duas grandes APIs executáveis:
-- **`educacao-api` (porta 8021):** Módulo de negócio educacional (alunos, matrículas, turmas, quadro de horários, presenças e Busca Ativa).
-- **`base-api` (porta 8025):** Módulo de hardware e infraestrutura (câmeras faciais, terminais de ônibus, Netty TCP, sincronia FDLib e streaming CFTV).
+A integração entre os domínios de **Educação** e **Base** usa dois mecanismos complementares:
 
-Ambos compartilham o mesmo cluster **PostgreSQL 16** com múltiplos schemas (`base`, `alunopresente`, `cadastro`, `storage`, `auth`, `integracaosql`). 
+- **REST** transporta arquivos e registra comandos na fronteira do `base-api`;
+- **SQL** detecta divergências, processa conjuntos e reconcilia o estado persistido.
 
-Para garantir alto desempenho, desacoplamento e consistência de dados, a comunicação entre eles segue regras arquiteturais rigorosas que determinam **quando utilizar requisições HTTP REST síncronas** e **quando utilizar Views SQL com jobs em background**.
+O resultado é uma integração de **consistência eventual**: uma resposta HTTP bem-sucedida confirma que o Base aceitou a operação, enquanto a confirmação da câmera ou do terminal pode ocorrer depois, em um batch próprio.
 
----
+:::tip[Regra rápida]
+Use **REST** para enviar uma intenção ou um payload ao Base. Use **view SQL** para descobrir *o que* está divergente. Use **SQL cross-schema explícito** somente para sincronizações em lote já previstas pela arquitetura.
+:::
 
-## 🧭 Matriz de Decisão: REST HTTP vs. View SQL
+## Limites de responsabilidade
 
-A escolha do canal de integração não é arbitrária — segue uma matriz técnica baseada em **natureza da operação, latência exigida, volume de dados e acoplamento de hardware**:
-
-| Critério de Avaliação | Usar Integração por REST HTTP (`RestTemplate`) | Usar Integração por View SQL (`integracaosql`) |
+| Componente | Responsabilidade | Porta / schema principal |
 |---|---|---|
-| **Natureza da Operação** | Comandos com efeito colateral, disparos para hardware ou upload de binários/mídia. | Reconciliação em lote, auditoria de integridade e cruzamento referencial. |
-| **Volume de Dados** | Registros individuais ou pequenos lotes (1 a 50 itens por chamada). | Alto volume / conjuntos massivos (centenas a dezenas de milhares de registros). |
-| **Acoplamento** | Síncrono (requisição / resposta com status HTTP 2xx/4xx/5xx). | Assíncrono e desacoplado em nível de dados (PostgreSQL JOIN otimizado). |
-| **Trânsito de Mídia** | **Obrigatório para arquivos:** Multipart upload de fotos JPEG/PNG. | **Proibido para blobs:** Views transitam apenas metadados, paths e IDs. |
-| **Ação em Hardware** | Dispara comando imediato de sincronização de template na memória da câmera. | Não toca diretamente no hardware; apenas expõe discrepâncias para schedules. |
-| **Exemplo Típico** | `POST /api/faces/incluirFaceUpload-integracao` | `SELECT ... FROM integracaosql.vw_ap_unidades_para_inserir_no_base` |
+| `educacao-api` | Alunos, matrículas, turmas, horários, presenças e Busca Ativa | `:8021` / `alunopresente` |
+| `base-api` | Faces, unidades lógicas, câmeras, terminais, Netty TCP e integrações com fabricantes | `:8025` / `base` |
+| `integracao-sql` | Migrações Flyway das views que comparam os schemas | `integracaosql` |
+| PostgreSQL 16 | Fonte de verdade persistida, compartilhada em schemas separados | `alunopresente`, `base`, `cadastro`, `storage`, `auth`, `integracaosql` |
 
-### 1. Quando Fazer Integração por Requisição (REST HTTP)
+Compartilhar o mesmo cluster reduz o custo de reconciliação, mas cria **acoplamento estrutural**: alterações de tabelas ou views precisam ser coordenadas entre os módulos. Por isso, o acesso cross-schema deve ficar restrito a repositórios e migrações conhecidos.
 
-A integração via HTTP REST síncrono é realizada pela classe [`IntegracaoBaseService`](file:///home/alisson/projetos/laboratorio-aplicacao-java/alunopresente-service/src/main/java/br/com/alunopresenteservice/domain/integracao/service/IntegracaoBaseService.java) dentro de `alunopresente-service` consumindo a porta `8025` de `base-api`.
+## Como escolher o canal
 
-Deve ser utilizada **obrigatoriamente** nos seguintes cenários:
+| Pergunta | REST HTTP | View SQL / SQL cross-schema |
+|---|---|---|
+| A operação expressa um comando ou efeito colateral? | **Sim.** Upload, criação de vínculo, marcação para remoção e alteração operacional. | **Não para views.** Views apenas descrevem o estado atual. |
+| Há arquivo binário? | **Obrigatório.** Fotos seguem como `multipart/form-data`. | **Não.** Consulte somente IDs, metadados e caminhos. |
+| O trabalho envolve muitos registros? | Use chamadas unitárias ou lotes pequenos, com retry controlado. | Prefira consulta ou escrita em lote executada pelo banco. |
+| É necessária uma resposta imediata? | O chamador recebe `2xx`, `4xx` ou `5xx` do Base. | O resultado aparece no próximo ciclo do scheduler. |
+| O retorno confirma o equipamento físico? | **Não necessariamente.** Em uploads e vínculos, `2xx` confirma o aceite pelo Base. | As views de status reconciliam depois o resultado gravado pelo processamento do dispositivo. |
+| Qual é o tipo de acoplamento? | Contrato HTTP, autenticação, DTO e disponibilidade do `base-api`. | Estrutura de tabelas, nomes de colunas e contrato da view. |
+| Como uma falha volta a ser processada? | A flag de sucesso não deve ser marcada; o item continua elegível para retry. | Enquanto a divergência existir, o registro reaparece na consulta. |
 
-1. **Upload e Distribuição de Arquivos Binários (Fotos dos Alunos):**
-   * O banco de dados relacional não deve ser saturado com transporte de payloads multipart pesados. O envio da foto do aluno cadastrado no portal web para persistência no `storage` e processamento biométrico ocorre via `POST /api/faces/incluirFaceUpload-integracao`.
-2. **Comandos com Efeito Colateral em Dispositivos Físicos:**
-   * Quando a operação exige acionamento de hardware em tempo hábil (ex: notificar o `base-api` para injetar a foto na lista branca/FDLib das câmeras da escola ou enviar comando de reboot/manutenção).
-3. **Expurgo Físico de Memória nas Câmeras (Remoção Total):**
-   * Quando um aluno é transferido, cancelado ou formado, as câmeras físicas precisam apagar a face de suas memórias internas por compliance de segurança e LGPD. O comando de remoção é disparado via `POST /api/faces/marcarParaRemocaoTotal`.
-4. **Vínculos Dinâmicos com Feedback Imediato:**
-   * Vinculação de uma face já existente no Base a uma nova Unidade Escolar ou Ônibus via `POST /api/faces/incluirFaceUnidade-integracao`.
+### Use REST quando
 
-### 2. Quando Fazer Integração por View SQL (`integracaosql`)
+1. **Enviar uma foto:** `POST /api/faces/incluirFaceUpload-integracao` recebe `multipart/form-data` e JWT Bearer.
+2. **Criar um vínculo:** `POST /api/faces/incluirFaceUnidade-integracao` associa uma face existente a uma escola ou veículo.
+3. **Marcar uma remoção:** `PUT /api/faces/marcarParaRemocaoTotal` registra a intenção de expurgo.
+4. **Consultar existência ou estado:** endpoints de verificação evitam recriar vínculos já presentes.
+5. **Alterar uma unidade com feedback imediato:** por exemplo, `PUT /api/unidades/atualizar-status-operacional`.
 
-O módulo dedicado [`integracao-sql`](file:///home/alisson/projetos/laboratorio-aplicacao-java/integracao-sql/) gerencia migrações Flyway que criam views no schema `integracaosql`. Essas views executam `JOIN`s entre as tabelas dos schemas `alunopresente` e `base`.
+Essas chamadas são implementadas por `IntegracaoBaseService`, no módulo `alunopresente-service`. O serviço obtém um token de integração, monta a requisição e chama a URL configurada em `URL_BASE_API`.
 
-Deve ser utilizada **obrigatoriamente** nos seguintes cenários:
+### Use views SQL quando
 
-1. **Detecção de Divergências de Estado (Reconciliação Contínua):**
-   * Identificar alunos cuja foto falhou na câmera (`vw_ap_alunos_com_status_divergente_da_face_falha`) ou teve sucesso (`vw_ap_alunos_com_status_divergente_da_face_sucesso`) sem necessidade de polling HTTP endpoint a endpoint.
-2. **Filas Naturais de Processamento (Batch Queues):**
-   * Descobrir registros pendentes de sincronização através de filtros simples em tempo real, como `vw_ap_face_nao_vinculado_no_base` (`WHERE atualizado_base IS FALSE`).
-3. **Migrações e Cargas em Massa de Alto Throughput (Zero Network Overhead):**
-   * Inserir escolas e veículos diretamente no schema `base` executando SQL puro entre schemas (`INSERT INTO base.tb_unidade SELECT ... FROM integracaosql.vw_ap_unidades_para_inserir_no_base ON CONFLICT DO NOTHING`), eliminando serialização JSON e tráfego de rede entre processos.
-4. **Agregações Analíticas e Cruzamentos de Presença/Alimentação:**
-   * Cruzar os eventos biométricos de refeitório registrados por hardware em `base.tb_evento_tratado` com as turmas e matrículas em `alunopresente.tb_matricula` para consolidação dos relatórios de refeições.
+1. **Detectar pendências:** `vw_ap_face_nao_vinculado_no_base` lista faces ainda não aceitas pelo Base.
+2. **Comparar o resultado de sincronização:** `vw_ap_alunos_com_status_divergente_da_face_falha` e `..._sucesso` expõem diferenças entre o status educacional e o status registrado no Base.
+3. **Solicitar reenvio em massa:** `vw_ap_unidades_escolares_sem_faces_base` e `vw_ap_veiculos_escolares_sem_faces_base` identificam unidades que precisam recompor suas bibliotecas.
+4. **Preparar uma carga em lote:** `vw_ap_unidades_para_inserir_no_base` fornece o conjunto usado no `INSERT ... SELECT` de unidades.
 
----
+Uma view **não é uma fila** e não executa trabalho sozinha. Ela recalcula um conjunto a partir do estado atual; o scheduler é quem consulta esse conjunto e inicia o processamento.
 
-## 🔄 O Padrão de Loop Fechado (Closed-Loop Sync)
+:::caution[Views são somente leitura]
+Não execute `INSERT`, `UPDATE` ou `DELETE` contra `integracaosql.vw_*`. Escritas devem atingir as tabelas canônicas. As rotinas cross-schema existentes fazem isso explicitamente em repositórios auditáveis.
+:::
 
-Na prática, o sistema combina **Views SQL**, **Schedules** e **Requisições REST** em um padrão elegante de arquitetura resiliente e autorreparável:
+## Fluxo de sincronização e reconciliação
 
-```mermaid
-sequenceDiagram
-    autonumber
-    participant PG as PostgreSQL (Multi-Schema)
-    participant VIEW as View (integracaosql.vw_*)
-    participant SCHED as Timer Schedule (educacao-api)
-    participant REST as IntegracaoBaseService
-    participant BASE as base-api:8025
-    participant CAM as Câmera IA / Terminal
+<div class="diagram-container">
+  <div class="diagram-header">
+    <div class="diagram-title">
+      <span class="pulse-dot"></span>
+      <span>Base ⇄ Educação: aceite no serviço e confirmação no equipamento</span>
+    </div>
+    <div class="diagram-actions">
+      <a href="/diagrams/base-educacao-sync.html" target="_blank" class="diagram-btn primary">
+        ↗ Abrir em nova aba
+      </a>
+      <button onclick="document.getElementById('frame-base-educacao').requestFullscreen()" class="diagram-btn">
+        ⛶ Modo fullscreen
+      </button>
+    </div>
+  </div>
+  <iframe id="frame-base-educacao" src="/diagrams/base-educacao-sync.html?embed=1" class="diagram-frame"></iframe>
+</div>
 
-    Note over PG,VIEW: 1. Estado no banco diverge (ex: atualizado_base = false)
-    VIEW-->>PG: View executa JOIN dinâmico entre schemas
-    SCHED->>VIEW: 2. Timer roda a cada N segundos e busca pendências
-    VIEW-->>SCHED: Retorna lista de registros divergentes
-    
-    loop Para cada registro pendente
-        SCHED->>REST: 3. Prepara DTO de integração
-        REST->>BASE: 4. Chamada REST HTTP com JWT Bearer
-        BASE->>CAM: 5. Transmite face via TCP / ISAPI
-        BASE-->>REST: 6. HTTP 200 OK (Sincronizado)
-        REST->>PG: 7. UPDATE atualizado_base = true / status_foto
-    end
-    
-    Note over PG,VIEW: 8. No próximo ciclo do timer, o registro já sumiu da View!
+<div class="diagram-tips">
+  <strong>Leitura recomendada:</strong> acompanhe as quatro fases no eixo vertical. No visualizador, use zoom, busca e destaque de participantes para isolar REST, banco ou equipamento.
+</div>
+
+O ciclo possui duas confirmações diferentes:
+
+1. **Aceite pelo Base:** o scheduler encontra uma pendência, chama o `base-api` por REST e atualiza a flag de envio somente após uma resposta bem-sucedida.
+2. **Aplicação no equipamento:** um batch do Base processa o estado pendente, conversa com a câmera ou terminal e persiste sucesso, falha ou timeout.
+3. **Reconciliação:** views comparam o status operacional do Base com o status educacional; outro ciclo atualiza `status_foto`.
+
+Essa separação impede que um `HTTP 200` seja interpretado incorretamente como confirmação de gravação na memória física do dispositivo.
+
+## Schedules do `educacao-api`
+
+Todos os intervalos abaixo foram conferidos em `ConfiguracaoTimerAlunoPresenteBaseService`. Em `fixedDelay`, a contagem recomeça **depois que o método retorna**; não é uma grade de horário fixa.
+
+### Envio e vínculos
+
+| Método | Intervalo | Descoberta / origem | Efeito | Proteção adicional |
+|---|---:|---|---|---|
+| `enviarFotosParaObase()` | 20 s | `vw_ap_face_nao_vinculado_no_base` | Upload REST da face; marca o envio somente em `2xx` | `AtomicBoolean` |
+| `envioVinculoUnidadeEscolarAluno()` | 20 s | Repositório de aluno ⇄ escola | Verifica a face e cria o vínculo por REST | `AtomicBoolean` + trava por INEP no serviço |
+| `enviarFotosParaOsVeiculos()` | 20 s | Repositório de aluno ⇄ veículo | Verifica a face e cria o vínculo com o veículo por REST | `AtomicBoolean` + trava por placa no serviço |
+
+### Cadastro, reenvio e reconciliação
+
+| Método | Intervalo | Mecanismo | Resultado |
+|---|---:|---|---|
+| `marcarFotosDaUnidadeEscolarParaReenvioPeloStatusDaUnidade()` | 25 s | View de unidades sem faces | Reabre pendências e retorna o controle da unidade para `MANTER` |
+| `marcarFotosDoVeiculoEscolarParaReenvioPeloStatusDaUnidade()` | 25 s | View de veículos sem faces | Reabre pendências do veículo e retorna o controle para `MANTER` |
+| `sincronizarCondicaoOperacional()` | 30 s | `UPDATE ... FROM` cross-schema | Copia a condição operacional do Base para Educação |
+| `cadastrarUnidadesNaoCadastradas()` | 60 s | View + `INSERT ... SELECT` | Insere no Base as unidades escolares ausentes |
+| `cadastrarVeiculosNaoCadastrados()` | 60 s | `INSERT ... SELECT` cross-schema | Insere no Base os veículos ausentes |
+| `scheduleAtualizacaoStatusAlunos()` | 120 s | Views de divergência de sucesso e falha | Atualiza `status_foto` no domínio educacional |
+| `enviarEventosRefeicao()` | 60 s | Redis + serviço educacional | Processa eventos de refeição de unidades ativas |
+
+### Remoção de faces e vínculos
+
+| Método | Intervalo | Etapa | Proteção adicional |
+|---|---:|---|---|
+| `marcarFotosParaRemocaoCompletaNoBase()` | 60 s | Envia ao Base a intenção de remover a face da escola | `AtomicBoolean` |
+| `verificarSeFacesMarcadasParaRemocaoForamRemovidasBase()` | 10 min | Consulta se a remoção física foi concluída | — |
+| `executarExclusaoDoRegistrosDeFacesTotalmenteRemovidas()` | 60 s | Exclui o vínculo educacional já confirmado como removido | `AtomicBoolean` |
+| `marcarVinculosFaceOnibusParaRemocaoCompletaNoBase()` | 60 s | Envia a intenção de remover o vínculo com o veículo | `AtomicBoolean` |
+| `verificarSeVinculosFaceOnibusMarcadasParaRemocaoForamRemovidasBase()` | 10 min | Consulta a conclusão da remoção no veículo | — |
+| `executarExclusaoDoRegistrosDeAlunoVeiculoEscolarTotalmenteRemovidos()` | 60 s | Exclui o vínculo aluno ⇄ veículo já confirmado | `AtomicBoolean` |
+
+:::note[Sobre concorrência]
+Nem todos os schedules usam `AtomicBoolean`. As travas aparecem nas rotinas em que o código exige exclusão explícita. Os fluxos assíncronos de escola e veículo também usam `ConcurrentHashMap` para impedir processamento simultâneo do mesmo INEP ou da mesma placa.
+:::
+
+## Processamento no `base-api`
+
+Depois do aceite REST, o Base ainda precisa aplicar a mudança nos equipamentos:
+
+| Rotina | Agendamento verificado | Função |
+|---|---:|---|
+| `EnviarFotoBatchConfig.executarBatch()` | `fixedDelay = 60.000 ms` | Envia faces pendentes aos dispositivos; possui `AtomicBoolean` próprio |
+| `RemoverFotoBatchConfig.executarBatch()` | `fixedDelay = 65.000 ms`, `initialDelay = 5.000 ms` | Processa remoções de face pendentes; possui `AtomicBoolean` próprio |
+| `RemocaoCompletaFaceBatchConfig.executarBatch()` | `fixedDelay = 3.670.000 ms`, `initialDelay = 10.000 ms` | Executa e consolida a remoção completa; possui `AtomicBoolean` próprio |
+| `EventoBufferService.flushBuffer()` | `fixedRate = 5.000 ms` | Persiste em lote eventos brutos acumulados |
+| `EventoTratadoBufferService.flushBuffer()` | `fixedDelay = 5.000 ms` | Persiste em lote eventos tratados acumulados |
+
+Os valores acima descrevem a configuração atual do código. Se um intervalo mudar, atualize esta página no mesmo pull request.
+
+## Semântica de falha e retry
+
+- **Falha antes do `2xx`:** a flag educacional não deve ser marcada como enviada; a pendência volta no próximo ciclo.
+- **`2xx` com dispositivo ainda pendente:** o Base aceitou o comando, mas o status físico continua em processamento.
+- **Falha ou timeout no equipamento:** o Base registra o resultado; as views de divergência permitem refletir a falha em `status_foto`.
+- **Reenvio de biblioteca:** o controle da unidade ou veículo reabre os vínculos para processamento.
+- **Remoção:** primeiro marca-se a intenção, depois confirma-se o expurgo e somente então o registro educacional é excluído.
+
+Não existe uma transação distribuída entre Educação, Base e equipamento. A segurança do fluxo depende de operações repetíveis, estados intermediários explícitos e reconciliação periódica.
+
+## Regras para novas integrações
+
+1. **Não crie relacionamentos JPA entre schemas.** Uma entidade de `alunopresente` não deve usar `@ManyToOne` para uma entidade de `base`.
+2. **Não trate uma view como fila persistente.** O registro deixa de aparecer somente quando as tabelas de origem convergem.
+3. **Não marque sucesso físico ao receber `HTTP 2xx`.** Diferencie aceite pelo Base de confirmação pelo dispositivo.
+4. **Projete endpoints para retry.** O scheduler pode repetir uma operação após falha de rede ou resposta perdida.
+5. **Atualize apenas tabelas canônicas.** Novas views devem ser versionadas no módulo `integracao-sql`.
+6. **Escolha a trava pelo escopo.** Use `AtomicBoolean` para exclusão do job inteiro e uma chave por INEP, placa ou dispositivo quando houver paralelismo interno.
+7. **Registre duração e resultado.** Logs devem distinguir: pendência encontrada, aceite HTTP, processamento físico e reconciliação.
+
+### Checklist de implementação
+
+- Qual sistema é a fonte de verdade para este campo?
+- A operação é uma consulta, um comando ou uma reconciliação?
+- O `2xx` significa aceite ou conclusão?
+- A repetição da chamada produz o mesmo resultado?
+- Qual estado mantém o item elegível para retry?
+- O processamento assíncrono pode sobreviver ao retorno do método agendado?
+- Existe uma view e uma migração Flyway cobrindo a nova divergência?
+- Há logs suficientes para localizar o item por aluno, INEP, placa ou dispositivo?
+
+## Referências no monorepo
+
+```text
+educacao-api/src/main/java/br/com/educacao/timers/
+  ConfiguracaoTimerAlunoPresenteBaseService.java
+
+alunopresente-service/src/main/java/br/com/alunopresenteservice/domain/integracao/service/
+  IntegracaoBaseService.java
+
+alunopresente-service/src/main/java/br/com/alunopresenteservice/domain/integracaobase/
+  service/EnviarFotoAlunoBaseService.java
+  repository/IEnviarFotoAlunoBaseRepository.java
+
+base-api/src/main/java/br/com/base/batch/config/
+  EnviarFotoBatchConfig.java
+  RemoverFotoBatchConfig.java
+  RemocaoCompletaFaceBatchConfig.java
+
+integracao-sql/src/main/resources/db/migration/integracaosqlalunopresente/view/
 ```
-
----
-
-## ⏰ Mapeamento das Schedules e Timers de Sincronização
-
-A orquestração das chamadas aos dois canais é controlada centralmente pela classe [`ConfiguracaoTimerAlunoPresenteBaseService.java`](file:///home/alisson/projetos/laboratorio-aplicacao-java/educacao-api/src/main/java/br/com/educacao/timers/ConfiguracaoTimerAlunoPresenteBaseService.java) no `educacao-api`.
-
-Cada timer utiliza travas atômicas (`AtomicBoolean` ou `ConcurrentHashMap`) para garantir que uma execução demorada **nunca gere concorrência ou sobreposição de lotes**.
-
-### Tabela de Schedules no `educacao-api`
-
-| Método Agendado | Frequência (`fixedDelay`) | View SQL / Repositório | Ação Executada & Canal Utilizado |
-|---|---|---|---|
-| `enviarFotosParaObase()` | **20 segundos** (`20_000`) | `integracaosql.vw_ap_face_nao_vinculado_no_base` | Busca alunos com foto que estão com `atualizado_base = false`. Para cada um, executa **REST** `POST /api/faces/incluirFaceUpload-integracao`. Ao receber 200, marca `atualizado_base = true`. |
-| `envioVinculoUnidadeEscolarAluno()` | **20 segundos** (`20_000`) | `IAlunoUnidadeEscolarRepository` | Envia o vínculo da matrícula do aluno com a Unidade Escolar para o Base via **REST** `POST /api/faces/incluirFaceUnidade-integracao`. |
-| `enviarFotosParaOsVeiculos()` | **20 segundos** (`20_000`) | `AlunoVeiculoEscolarService` | Vincula a face do aluno ao validador facial do ônibus escolar específico via **REST**. |
-| `marcarFotosDaUnidadeEscolarParaReenvioPeloStatusDaUnidade()` | **25 segundos** (`25_000`) | `integracaosql.vw_ap_unidades_escolares_sem_faces_base` | Identifica unidades onde `controle_faces = 'AGUARDANDO_ENVIO_DAS_FACES'`, redefine os alunos para reenvio (`atualizado_base = false`) e muda o controle da escola para `MANTER`. |
-| `marcarFotosDoVeiculoEscolarParaReenvioPeloStatusDaUnidade()` | **25 segundos** (`25_000`) | `integracaosql.vw_ap_veiculos_escolares_sem_faces_base` | Identifica veículos escolares que precisam de sincronização completa de faces e agenda a retransmissão dos lotes. |
-| `sincronizarCondicaoOperacional()` | **30 segundos** (`30_000`) | `unidadeEscolarRepository.sincronizarCondicaoOperacionalComOSistemaBase()` | Atualiza a condição operacional (ATIVO / DESATIVADO) entre a tabela física `base.tb_unidade` e a `alunopresente.tb_unidade_escolar` via **SQL Cross-Schema**. |
-| `cadastrarUnidadesNaoCadastradas()` | **60 segundos** (`60_000`) | `integracaosql.vw_ap_unidades_para_inserir_no_base` | Executa `INSERT INTO base.tb_unidade SELECT ... FROM integracaosql.vw_ap_unidades_para_inserir_no_base ON CONFLICT DO NOTHING` via **SQL Cross-Schema direto**. |
-| `cadastrarVeiculosNaoCadastrados()` | **60 segundos** (`60_000`) | `IVeiculoRepository.cadastrarVeiculosNaoCadastradosNoBase()` | Insere novos ônibus cadastrados no transporte escolar na tabela `base.tb_unidade` como unidades móveis com `tipo_unidade_id = 'Transporte Escolar'`. |
-| `scheduleAtualizacaoStatusAlunos()` | **120 segundos** (`120_000`) | `integracaosql.vw_ap_alunos_com_status_divergente_da_face_falha` e `..._sucesso` | Lê o status real da sincronia de cada face nas câmeras (`base.tb_biblioteca_face_sincronia`) e atualiza o campo `status_foto` do aluno no schema `alunopresente` para `FALHA` ou `SUCESSO`. |
-| `marcarFotosParaRemocaoCompletaNoBase()` | **60 segundos** (`60_000`) | `RemocaoCompletaFotoAlunoService` | Coleta alunos desvinculados ou marcados para exclusão e notifica o Base via **REST** `POST /api/faces/marcarParaRemocaoTotal`. |
-| `verificarSeFacesMarcadasParaRemocaoForamRemovidasBase()` | **10 minutos** (`600_000`) | `RemocaoCompletaFotoAlunoService` | Consulta o status no Base para auditar se os dispositivos de campo já confirmaram o expurgo físico das memórias locais. |
-| `executarExclusaoDoRegistrosDeFacesTotalmenteRemovidas()` | **60 segundos** (`60_000`) | `RemocaoCompletaFotoAlunoService` | Após a confirmação física de expurgo pelas câmeras, limpa os registros lógicos e vínculos no schema `alunopresente`. |
-| `enviarEventosRefeicao()` | **60 segundos** (`60_000`) | `EventoAlunoRefeicaoRedisService` | Drena eventos de refeição cacheados no Redis e sincroniza o quadro de consumo alimentar das unidades escolares ativas. |
-
----
-
-### Schedules Complementares no `base-api`
-
-Do lado do **`base-api`**, a classe [`ConfiguracaoTimerService.java`](file:///home/alisson/projetos/laboratorio-aplicacao-java/base-api/src/main/java/br/com/base/timers/ConfiguracaoTimerService.java) e os jobs do Spring Batch processam a ponta final com os equipamentos físicos:
-
-* **`EnviarFotoBatchConfig` (a cada 60s):** Pega as faces registradas no `base` e despacha para as bibliotecas das câmeras através dos protocolos ISAPI/TCP do fabricante.
-* **`RemocaoCompletaFaceBatchConfig` (a cada 1h):** Executa a limpeza física em lote nas câmeras para manter as listas brancas enxutas e dentro dos limites de hardware (NPU/FDLib).
-* **Buffers de Eventos (a cada 5s):** [`EventoTratadoBufferService`](file:///home/alisson/projetos/laboratorio-aplicacao-java/base-service/src/main/java/br/com/baseservice/domain/buffer/EventoTratadoBufferService.java) e `EventoBufferService` gravam em lote no banco e publicam no RabbitMQ com alta performance e baixo lock.
-
----
-
-## 🛡️ Regras de Ouro para Desenvolvedores
-
-1. **Nunca crie dependência direta entre entidades JPA de schemas diferentes:** Entidades de `alunopresente` **nunca** devem mapear `@ManyToOne` para entidades de `base`. Use views no schema `integracaosql` ou chamadas de serviço via REST.
-2. **Views SQL são apenas de leitura:** As views de `integracaosql` nunca devem ser alvo de `UPDATE` ou `INSERT` direto; alterações devem ocorrer nas tabelas canônicas de seus respectivos schemas.
-3. **Respeite as travas atômicas em Timers:** Ao implementar novas rotinas em `ConfiguracaoTimerAlunoPresenteBaseService`, sempre encapsule a execução em um `AtomicBoolean.compareAndSet(false, true)` com bloco `try/finally` para evitar loops de processamento duplicado.

@@ -1,0 +1,215 @@
+{
+  "schema_version": 1,
+  "diagram_type": "sequence",
+  "meta": {
+    "title": "Sincronização Base ⇄ Educação",
+    "output": "public/diagrams/base-educacao-sync.html",
+    "viewBox": [1300, 700],
+    "quality_profile": "showcase",
+    "column_fit": "spread"
+  },
+  "participants": [
+    {
+      "id": "educacaoDb",
+      "type": "database",
+      "label": "Educação"
+    },
+    {
+      "id": "viewsSql",
+      "type": "database",
+      "label": "Views SQL"
+    },
+    {
+      "id": "scheduler",
+      "type": "backend",
+      "label": "Scheduler"
+    },
+    {
+      "id": "restClient",
+      "type": "backend",
+      "label": "Cliente REST"
+    },
+    {
+      "id": "baseApi",
+      "type": "backend",
+      "label": "base-api :8025"
+    },
+    {
+      "id": "baseDb",
+      "type": "database",
+      "label": "Estado Base"
+    },
+    {
+      "id": "device",
+      "type": "external",
+      "label": "Equipamento"
+    }
+  ],
+  "segments": [
+    {
+      "from": 150,
+      "to": 224,
+      "label": "1. Detectar pendência"
+    },
+    {
+      "from": 236,
+      "to": 408,
+      "label": "2. Aceitar no Base"
+    },
+    {
+      "from": 420,
+      "to": 568,
+      "label": "3. Aplicar no equipamento"
+    },
+    {
+      "from": 570,
+      "to": 620,
+      "label": "4. Reconciliar resultado"
+    }
+  ],
+  "messages": [
+    {
+      "id": "consultarPendencias",
+      "from": "scheduler",
+      "to": "viewsSql",
+      "y": 174,
+      "label": "SELECT pendências (JOIN alunopresente ⇄ base)",
+      "variant": "default"
+    },
+    {
+      "id": "retornarPendencias",
+      "from": "viewsSql",
+      "to": "scheduler",
+      "y": 208,
+      "label": "registros pendentes",
+      "variant": "return"
+    },
+    {
+      "id": "prepararRequisicao",
+      "from": "scheduler",
+      "to": "restClient",
+      "y": 260,
+      "label": "prepara DTO ou multipart",
+      "variant": "default"
+    },
+    {
+      "id": "enviarComando",
+      "from": "restClient",
+      "to": "baseApi",
+      "y": 294,
+      "label": "POST ou PUT + JWT Bearer",
+      "variant": "security"
+    },
+    {
+      "id": "persistirIntencao",
+      "from": "baseApi",
+      "to": "baseDb",
+      "y": 328,
+      "label": "persiste face, vínculo ou intenção",
+      "variant": "emphasis"
+    },
+    {
+      "id": "confirmarAceite",
+      "from": "baseApi",
+      "to": "restClient",
+      "y": 362,
+      "label": "HTTP 2xx: aceito pelo Base",
+      "variant": "return",
+      "note": "Ainda não confirma aplicação física no equipamento."
+    },
+    {
+      "id": "marcarAceite",
+      "from": "restClient",
+      "to": "educacaoDb",
+      "y": 396,
+      "label": "atualiza flag de envio ao Base",
+      "variant": "emphasis"
+    },
+    {
+      "id": "lerTrabalhoPendente",
+      "from": "baseApi",
+      "to": "baseDb",
+      "y": 450,
+      "label": "batch lê sincronizações pendentes",
+      "variant": "default"
+    },
+    {
+      "id": "aplicarNoEquipamento",
+      "from": "baseApi",
+      "to": "device",
+      "y": 484,
+      "label": "aplica face, vínculo ou remoção",
+      "variant": "emphasis"
+    },
+    {
+      "id": "resultadoFisico",
+      "from": "device",
+      "to": "baseApi",
+      "y": 518,
+      "label": "sucesso, falha ou timeout",
+      "variant": "return"
+    },
+    {
+      "id": "persistirResultado",
+      "from": "baseApi",
+      "to": "baseDb",
+      "y": 552,
+      "label": "grava status operacional",
+      "variant": "emphasis"
+    },
+    {
+      "id": "buscarStatus",
+      "from": "scheduler",
+      "to": "viewsSql",
+      "y": 580,
+      "label": "SELECT status divergente no próximo ciclo",
+      "variant": "default"
+    },
+    {
+      "id": "atualizarStatusEducacao",
+      "from": "scheduler",
+      "to": "educacaoDb",
+      "y": 612,
+      "label": "atualiza status_foto",
+      "variant": "emphasis"
+    }
+  ],
+  "activations": [
+    {
+      "participant": "scheduler",
+      "from": 166,
+      "to": 272,
+      "type": "backend"
+    },
+    {
+      "participant": "restClient",
+      "from": 252,
+      "to": 408,
+      "type": "backend"
+    },
+    {
+      "participant": "baseApi",
+      "from": 286,
+      "to": 374,
+      "type": "backend"
+    },
+    {
+      "participant": "baseApi",
+      "from": 442,
+      "to": 564,
+      "type": "backend"
+    },
+    {
+      "participant": "device",
+      "from": 476,
+      "to": 530,
+      "type": "external"
+    },
+    {
+      "participant": "scheduler",
+      "from": 572,
+      "to": 624,
+      "type": "backend"
+    }
+  ]
+}
